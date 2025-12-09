@@ -1,0 +1,109 @@
+.collections-header {
+  margin-bottom: 48px;
+}
+
+.collections-header h1 {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: #000;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(309px, 1fr));
+  gap: 16px;
+  margin-bottom: 60px;
+}
+
+.collections-loading,
+.collections-error {
+  text-align: center;
+  padding: 60px 20px;
+  font-family: 'Gilroy', sans-serif;
+  font-size: 18px;
+  color: #666;
+}
+
+.collections-error {
+  color: #d32f2f;
+}
+
+.collections-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 40px 0;
+}
+
+.pagination-btn {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 32px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #333;
+}
+
+.pagination-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-numbers {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pagination-number {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  width: 44px;
+  height: 44px;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-number:hover {
+  background-color: #f5f5f5;
+  border-color: #000;
+}
+
+.pagination-number.active {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+@media (max-width: 768px) {
+  .collections-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+  }
+
+  .collections-header h1 {
+    font-size: 36px;
+  }
+}

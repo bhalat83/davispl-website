@@ -1,0 +1,305 @@
+.kontakt {
+  width: 100%;
+}
+
+/* Contact Section */
+.kontakt-section {
+  width: 100%;
+  background-color: #fff;
+  padding: 120px 0;
+}
+
+.kontakt-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 70px;
+}
+
+.kontakt-main-title {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 48px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: #000;
+  margin: 0 0 80px 0;
+}
+
+/* Grid Layout */
+.kontakt-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px;
+}
+
+.kontakt-column {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* Company Column */
+.kontakt-company-name {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 140%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 0 0 24px 0;
+}
+
+.kontakt-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kontakt-info p {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 160%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 0;
+}
+
+.kontakt-info .kontakt-phone {
+  margin-top: 8px;
+  font-weight: 400;
+}
+
+.kontakt-info .kontakt-legal {
+  color: #666;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Department Blocks */
+.kontakt-department {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kontakt-department-name {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 140%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 0 0 8px 0;
+}
+
+.kontakt-email,
+.kontakt-phone {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 160%;
+  letter-spacing: 0%;
+  color: #000;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.kontakt-email:hover,
+.kontakt-phone:hover {
+  opacity: 0.6;
+}
+
+/* Sales Regions Section */
+.kontakt-sales-section {
+  width: 100%;
+  background-color: #fff;
+  padding: 120px 0;
+}
+
+.kontakt-sales-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 70px;
+}
+
+.kontakt-sales-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.kontakt-sales-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.kontakt-sales-header {
+  background-color: #000;
+  padding: 20px 30px;
+  margin-bottom: 0;
+}
+
+.kontakt-sales-header h2 {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 140%;
+  letter-spacing: 0%;
+  color: #fff;
+  margin: 0;
+}
+
+.kontakt-sales-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: #F0F0F0;
+  padding: 32px;
+}
+
+.kontakt-sales-label {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 140%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 0;
+}
+
+.kontakt-sales-select {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 140%;
+  letter-spacing: 0%;
+  color: #000;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.kontakt-sales-select:hover {
+  border-color: #000;
+}
+
+.kontakt-sales-select:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.kontakt-sales-info {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 8px;
+}
+
+.kontakt-sales-person,
+.kontakt-sales-office {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kontakt-sales-name,
+.kontakt-sales-office-name {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 140%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 0 0 4px 0;
+}
+
+.kontakt-sales-phone,
+.kontakt-sales-email {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 160%;
+  letter-spacing: 0%;
+  color: #000;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.kontakt-sales-phone:hover,
+.kontakt-sales-email:hover {
+  opacity: 0.6;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .kontakt-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .kontakt-column {
+    gap: 40px;
+  }
+
+  .kontakt-container {
+    padding: 0 40px;
+  }
+
+  .kontakt-main-title {
+    font-size: 40px;
+    margin-bottom: 60px;
+  }
+
+  .kontakt-sales-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .kontakt-sales-container {
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .kontakt-section {
+    padding: 80px 0;
+  }
+
+  .kontakt-container {
+    padding: 0 20px;
+  }
+
+  .kontakt-main-title {
+    font-size: 32px;
+    margin-bottom: 48px;
+  }
+
+  .kontakt-column {
+    gap: 32px;
+  }
+
+  .kontakt-sales-section {
+    padding: 80px 0;
+  }
+
+  .kontakt-sales-container {
+    padding: 0 20px;
+  }
+
+  .kontakt-sales-grid {
+    gap: 32px;
+  }
+}

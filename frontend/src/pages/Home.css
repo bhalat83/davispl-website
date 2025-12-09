@@ -1,0 +1,452 @@
+.home {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image {
+  max-width: 1440px;
+  width: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.hero-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 40px;
+  right: 40px;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1440px;
+  width: 100%;
+  padding: 0 40px 0 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.hero-title {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: #fff;
+  margin: 0;
+}
+
+.hero-subtitle {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 160%;
+  letter-spacing: 0%;
+  color: #fff;
+  margin: 0;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 12px 32px;
+  background-color: #fff;
+  color: #000;
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 170%;
+  letter-spacing: 0%;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.hero-button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* About Section */
+.about {
+  width: 100%;
+  background-color: #fff;
+  padding: 120px 0;
+}
+
+.about-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-text {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 160%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #000;
+  margin: 0;
+  max-width: 900px;
+}
+
+/* New Collections Section */
+.new-collections {
+  width: 100%;
+  padding: 120px 0;
+  background-color: #fff;
+}
+
+.new-collections-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 0px;
+  overflow: visible;
+}
+
+.new-collections-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+  padding-left: 30px;
+}
+
+.new-collections-title {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 0;
+}
+
+.new-collections-controls {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.view-all-btn {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  color: #000;
+  text-decoration: none;
+  transition: opacity 0.4s ease;
+}
+
+.view-all-btn:hover {
+  opacity: 0.6;
+}
+
+.carousel-controls {
+  display: flex;
+  gap: 16px;
+}
+
+.carousel-btn {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #000;
+  background-color: transparent;
+  color: #000;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-btn:hover:not(:disabled) {
+  background-color: #000;
+  color: #fff;
+}
+
+.carousel-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.carousel {
+  overflow: visible;
+  width: 100%;
+  position: relative;
+  margin-left: 30px;
+}
+
+.carousel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -40px;
+  width: 40px;
+  height: 100%;
+  pointer-events: none;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 16px;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+.carousel-item {
+  width: 309px;
+  flex-shrink: 0;
+}
+
+/* Trends Section */
+.trends {
+  width: 100%;
+  padding: 120px 0;
+}
+
+.trends-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.trend-card {
+  aspect-ratio: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Kafelek 1 - Intro */
+.trend-intro {
+  padding: 20px 40px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.trend-intro-title {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 0;
+}
+
+.trend-intro-text {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 160%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 16px 0 24px 0;
+}
+
+.trend-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 12px 32px;
+  background-color: transparent;
+  color: #000;
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 170%;
+  letter-spacing: 0%;
+  text-decoration: none;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.trend-button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Kafelki 2-5 - Zdjęcia */
+.trend-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.trend-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+}
+
+.trend-name {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  font-family: 'Gilroy', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: #fff;
+  z-index: 1;
+}
+
+/* Kafelek 6 - Outro */
+.trend-outro {
+  padding: 40px 40px 20px 20px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.trend-outro-text {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 160%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-image {
+    padding: 0 20px;
+  }
+
+  .hero-image::after {
+    left: 20px;
+    right: 20px;
+  }
+
+  .hero-content {
+    bottom: 40px;
+    padding: 0 20px 0 40px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+
+  .trends-container {
+    padding: 0 20px;
+    grid-template-columns: 1fr;
+  }
+
+  .trend-intro-title {
+    font-size: 32px;
+  }
+
+  .trend-intro {
+    padding: 40px 40px 40px 40px;
+  }
+
+  .about {
+    padding: 80px 0;
+  }
+
+  .about-container {
+    padding: 0 20px;
+  }
+
+  .about-text {
+    font-size: 20px;
+  }
+
+  .trends {
+    padding: 80px 0;
+  }
+
+  .new-collections {
+    padding: 80px 0;
+  }
+
+  .new-collections-container {
+    padding: 0 20px;
+  }
+
+  .new-collections-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding-left: 20px;
+  }
+
+  .new-collections-title {
+    font-size: 32px;
+  }
+
+  .new-collections-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .carousel-item {
+    width: calc(50% - 8px);
+  }
+}

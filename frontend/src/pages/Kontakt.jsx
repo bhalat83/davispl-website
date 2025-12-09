@@ -1,0 +1,386 @@
+import { useState } from 'react';
+import './Kontakt.css';
+
+function Kontakt() {
+  const [selectedRegion1, setSelectedRegion1] = useState('');
+  const [selectedRegion2, setSelectedRegion2] = useState('');
+  const [selectedRegion3, setSelectedRegion3] = useState('');
+
+  const departments = [
+    'Dział sprzedaży',
+    'Biuro zarządu',
+    'Dział księgowy',
+    'Dział marketingu',
+    'Dział personalny',
+    'Dział reklamacji',
+    'Showroom Davis Home'
+  ];
+
+  // Dane handlowców przypisanych do województw
+  const salesData = {
+    'dolnośląskie': {
+      name: 'Jan Kowalski',
+      phone: '+48 33 812 70 60',
+      email: 'jan.kowalski@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 71 123 45 67',
+        email: 'wroclaw@davis.pl'
+      }
+    },
+    'kujawsko-pomorskie': {
+      name: 'Anna Nowak',
+      phone: '+48 33 812 70 61',
+      email: 'anna.nowak@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 52 123 45 67',
+        email: 'bydgoszcz@davis.pl'
+      }
+    },
+    'lubelskie': {
+      name: 'Piotr Wiśniewski',
+      phone: '+48 33 812 70 62',
+      email: 'piotr.wisniewski@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 81 123 45 67',
+        email: 'lublin@davis.pl'
+      }
+    },
+    'lubuskie': {
+      name: 'Maria Wójcik',
+      phone: '+48 33 812 70 63',
+      email: 'maria.wojcik@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 95 123 45 67',
+        email: 'gorzow@davis.pl'
+      }
+    },
+    'łódzkie': {
+      name: 'Tomasz Kamiński',
+      phone: '+48 33 812 70 64',
+      email: 'tomasz.kaminski@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 42 123 45 67',
+        email: 'lodz@davis.pl'
+      }
+    },
+    'małopolskie': {
+      name: 'Katarzyna Lewandowska',
+      phone: '+48 33 812 70 65',
+      email: 'katarzyna.lewandowska@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 12 123 45 67',
+        email: 'krakow@davis.pl'
+      }
+    },
+    'mazowieckie': {
+      name: 'Paweł Zieliński',
+      phone: '+48 33 812 70 66',
+      email: 'pawel.zielinski@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 22 123 45 67',
+        email: 'warszawa@davis.pl'
+      }
+    },
+    'opolskie': {
+      name: 'Magdalena Szymańska',
+      phone: '+48 33 812 70 67',
+      email: 'magdalena.szymanska@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 77 123 45 67',
+        email: 'opole@davis.pl'
+      }
+    },
+    'podkarpackie': {
+      name: 'Grzegorz Woźniak',
+      phone: '+48 33 812 70 68',
+      email: 'grzegorz.wozniak@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 17 123 45 67',
+        email: 'rzeszow@davis.pl'
+      }
+    },
+    'podlaskie': {
+      name: 'Ewa Dąbrowska',
+      phone: '+48 33 812 70 69',
+      email: 'ewa.dabrowska@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 85 123 45 67',
+        email: 'bialystok@davis.pl'
+      }
+    },
+    'pomorskie': {
+      name: 'Michał Kozłowski',
+      phone: '+48 33 812 70 70',
+      email: 'michal.kozlowski@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 58 123 45 67',
+        email: 'gdansk@davis.pl'
+      }
+    },
+    'śląskie': {
+      name: 'Agnieszka Jankowska',
+      phone: '+48 33 812 70 71',
+      email: 'agnieszka.jankowska@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 32 123 45 67',
+        email: 'katowice@davis.pl'
+      }
+    },
+    'świętokrzyskie': {
+      name: 'Krzysztof Mazur',
+      phone: '+48 33 812 70 72',
+      email: 'krzysztof.mazur@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 41 123 45 67',
+        email: 'kielce@davis.pl'
+      }
+    },
+    'warmińsko-mazurskie': {
+      name: 'Joanna Krawczyk',
+      phone: '+48 33 812 70 73',
+      email: 'joanna.krawczyk@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 89 123 45 67',
+        email: 'olsztyn@davis.pl'
+      }
+    },
+    'wielkopolskie': {
+      name: 'Adam Piotrowski',
+      phone: '+48 33 812 70 74',
+      email: 'adam.piotrowski@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 61 123 45 67',
+        email: 'poznan@davis.pl'
+      }
+    },
+    'zachodniopomorskie': {
+      name: 'Barbara Grabowska',
+      phone: '+48 33 812 70 75',
+      email: 'barbara.grabowska@davis.pl',
+      office: {
+        name: 'Biuro obsługi klienta',
+        phone: '+48 91 123 45 67',
+        email: 'szczecin@davis.pl'
+      }
+    }
+  };
+
+  const regions = Object.keys(salesData);
+
+  return (
+    <div className="kontakt">
+      {/* Contact Section */}
+      <section className="kontakt-section">
+        <div className="kontakt-container">
+          <h1 className="kontakt-main-title">Kontakt</h1>
+
+          <div className="kontakt-grid">
+            {/* Column 1 - Company Data */}
+            <div className="kontakt-column">
+              <h2 className="kontakt-company-name">Davis Fabrics Sp. z o.o.</h2>
+              <div className="kontakt-info">
+                <p>ul. Miłosna 37</p>
+                <p>43–346 Bielsko-Biała</p>
+                <p className="kontakt-phone">+48 33 816 36 60</p>
+                <p className="kontakt-legal">NIP PL5472185966</p>
+                <p className="kontakt-legal">REGON 368618137</p>
+              </div>
+            </div>
+
+            {/* Column 2 - Departments 1-3 */}
+            <div className="kontakt-column">
+              {departments.slice(0, 3).map((dept, index) => (
+                <div key={index} className="kontakt-department">
+                  <h3 className="kontakt-department-name">{dept}</h3>
+                  <a href="mailto:hello@davis.pl" className="kontakt-email">hello@davis.pl</a>
+                  <a href="tel:+48338127060" className="kontakt-phone">+48 33 812 70 60</a>
+                </div>
+              ))}
+            </div>
+
+            {/* Column 3 - Departments 4-5 */}
+            <div className="kontakt-column">
+              {departments.slice(3, 5).map((dept, index) => (
+                <div key={index} className="kontakt-department">
+                  <h3 className="kontakt-department-name">{dept}</h3>
+                  <a href="mailto:hello@davis.pl" className="kontakt-email">hello@davis.pl</a>
+                  <a href="tel:+48338127060" className="kontakt-phone">+48 33 812 70 60</a>
+                </div>
+              ))}
+            </div>
+
+            {/* Column 4 - Departments 6-7 */}
+            <div className="kontakt-column">
+              {departments.slice(5).map((dept, index) => (
+                <div key={index} className="kontakt-department">
+                  <h3 className="kontakt-department-name">{dept}</h3>
+                  <a href="mailto:hello@davis.pl" className="kontakt-email">hello@davis.pl</a>
+                  <a href="tel:+48338127060" className="kontakt-phone">+48 33 812 70 60</a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sales Regions Section */}
+      <section className="kontakt-sales-section">
+        <div className="kontakt-sales-container">
+          <div className="kontakt-sales-grid">
+            {/* Column 1 */}
+            <div className="kontakt-sales-column">
+              <div className="kontakt-sales-header">
+                <h2>Dział sprzedaży krajowej</h2>
+              </div>
+              <div className="kontakt-sales-content">
+                <label className="kontakt-sales-label">Wybierz region:</label>
+                <select
+                  className="kontakt-sales-select"
+                  value={selectedRegion1}
+                  onChange={(e) => setSelectedRegion1(e.target.value)}
+                >
+                  <option value="">Wybierz województwo</option>
+                  {regions.map((region) => (
+                    <option key={region} value={region}>
+                      {region}
+                    </option>
+                  ))}
+                </select>
+
+                {selectedRegion1 && salesData[selectedRegion1] && (
+                  <div className="kontakt-sales-info">
+                    <div className="kontakt-sales-person">
+                      <p className="kontakt-sales-name">{salesData[selectedRegion1].name}</p>
+                      <a href={`tel:${salesData[selectedRegion1].phone}`} className="kontakt-sales-phone">
+                        {salesData[selectedRegion1].phone}
+                      </a>
+                      <a href={`mailto:${salesData[selectedRegion1].email}`} className="kontakt-sales-email">
+                        {salesData[selectedRegion1].email}
+                      </a>
+                    </div>
+                    <div className="kontakt-sales-office">
+                      <p className="kontakt-sales-office-name">{salesData[selectedRegion1].office.name}</p>
+                      <a href={`tel:${salesData[selectedRegion1].office.phone}`} className="kontakt-sales-phone">
+                        {salesData[selectedRegion1].office.phone}
+                      </a>
+                      <a href={`mailto:${salesData[selectedRegion1].office.email}`} className="kontakt-sales-email">
+                        {salesData[selectedRegion1].office.email}
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Column 2 */}
+            <div className="kontakt-sales-column">
+              <div className="kontakt-sales-header">
+                <h2>Dział sprzedaży krajowej</h2>
+              </div>
+              <div className="kontakt-sales-content">
+                <label className="kontakt-sales-label">Wybierz region:</label>
+                <select
+                  className="kontakt-sales-select"
+                  value={selectedRegion2}
+                  onChange={(e) => setSelectedRegion2(e.target.value)}
+                >
+                  <option value="">Wybierz województwo</option>
+                  {regions.map((region) => (
+                    <option key={region} value={region}>
+                      {region}
+                    </option>
+                  ))}
+                </select>
+
+                {selectedRegion2 && salesData[selectedRegion2] && (
+                  <div className="kontakt-sales-info">
+                    <div className="kontakt-sales-person">
+                      <p className="kontakt-sales-name">{salesData[selectedRegion2].name}</p>
+                      <a href={`tel:${salesData[selectedRegion2].phone}`} className="kontakt-sales-phone">
+                        {salesData[selectedRegion2].phone}
+                      </a>
+                      <a href={`mailto:${salesData[selectedRegion2].email}`} className="kontakt-sales-email">
+                        {salesData[selectedRegion2].email}
+                      </a>
+                    </div>
+                    <div className="kontakt-sales-office">
+                      <p className="kontakt-sales-office-name">{salesData[selectedRegion2].office.name}</p>
+                      <a href={`tel:${salesData[selectedRegion2].office.phone}`} className="kontakt-sales-phone">
+                        {salesData[selectedRegion2].office.phone}
+                      </a>
+                      <a href={`mailto:${salesData[selectedRegion2].office.email}`} className="kontakt-sales-email">
+                        {salesData[selectedRegion2].office.email}
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Column 3 */}
+            <div className="kontakt-sales-column">
+              <div className="kontakt-sales-header">
+                <h2>Dział sprzedaży krajowej</h2>
+              </div>
+              <div className="kontakt-sales-content">
+                <label className="kontakt-sales-label">Wybierz region:</label>
+                <select
+                  className="kontakt-sales-select"
+                  value={selectedRegion3}
+                  onChange={(e) => setSelectedRegion3(e.target.value)}
+                >
+                  <option value="">Wybierz województwo</option>
+                  {regions.map((region) => (
+                    <option key={region} value={region}>
+                      {region}
+                    </option>
+                  ))}
+                </select>
+
+                {selectedRegion3 && salesData[selectedRegion3] && (
+                  <div className="kontakt-sales-info">
+                    <div className="kontakt-sales-person">
+                      <p className="kontakt-sales-name">{salesData[selectedRegion3].name}</p>
+                      <a href={`tel:${salesData[selectedRegion3].phone}`} className="kontakt-sales-phone">
+                        {salesData[selectedRegion3].phone}
+                      </a>
+                      <a href={`mailto:${salesData[selectedRegion3].email}`} className="kontakt-sales-email">
+                        {salesData[selectedRegion3].email}
+                      </a>
+                    </div>
+                    <div className="kontakt-sales-office">
+                      <p className="kontakt-sales-office-name">{salesData[selectedRegion3].office.name}</p>
+                      <a href={`tel:${salesData[selectedRegion3].office.phone}`} className="kontakt-sales-phone">
+                        {salesData[selectedRegion3].office.phone}
+                      </a>
+                      <a href={`mailto:${salesData[selectedRegion3].office.email}`} className="kontakt-sales-email">
+                        {salesData[selectedRegion3].office.email}
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export default Kontakt;
