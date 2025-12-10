@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations';
 import CollectionCard from '../components/CollectionCard';
 import './Home.css';
 
 function Home() {
+  const { language } = useLanguage();
+  const t = translations[language].home;
   const [newCollections, setNewCollections] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const itemsPerSlide = 4;
@@ -49,12 +53,12 @@ function Home() {
           <img src="/home/hero.jpg" alt="Davis Fabrics" />
         </div>
         <div className="hero-content">
-          <h1 className="hero-title">Odkryj piękno wnętrz</h1>
+          <h1 className="hero-title">{t.heroTitle}</h1>
           <p className="hero-subtitle">
-            Tworzymy tkaniny do pięknych przestrzeni i miejsc.<br></br> Tworzą je ludzie, dla ludzi.
+            {t.heroSubtitle}
           </p>
           <Link to="/kolekcje" className="hero-button">
-            Przeglądaj kolekcje
+            {t.heroCta}
           </Link>
         </div>
       </section>
@@ -63,7 +67,7 @@ function Home() {
       <section className="about">
         <div className="about-container">
           <p className="about-text">
-            W Davis Fabrics łączymy pasję do designu z odpowiedzialnością za środowisko, oferując innowacyjne rozwiązania, które harmonijnie wpisują się w potrzeby współczesnych wnętrz. Nasze materiały powstają z myślą o trwałości, estetyce i zrównoważonym rozwoju, aby każdy projekt mógł być nie tylko wyjątkowy, ale także przyjazny dla natury.
+            {t.aboutText}
           </p>
         </div>
       </section>
@@ -72,10 +76,10 @@ function Home() {
       <section className="new-collections">
         <div className="new-collections-container">
           <div className="new-collections-header">
-            <h2 className="new-collections-title">Nowości</h2>
+            <h2 className="new-collections-title">{t.newCollectionsTitle}</h2>
             <div className="new-collections-controls">
               <Link to="/kolekcje" className="view-all-btn">
-                PRZEJDŹ DO KOLEKCJI ↗
+                {t.viewAllCollections}
               </Link>
               <div className="carousel-controls">
                 <button onClick={prevSlide} className="carousel-btn carousel-prev" disabled={currentSlide === 0}>
@@ -110,13 +114,13 @@ function Home() {
           {/* Kafelek 1 - Intro */}
           <div className="trend-card trend-intro">
             <div>
-              <h2 className="trend-intro-title">Trendy</h2>
+              <h2 className="trend-intro-title">{t.trendsTitle}</h2>
               <p className="trend-intro-text">
-                Od klasycznych po awangardowe wzory - znajdziesz tu wszystko, co definiuje współczesny design wnętrz.
+                {t.trendsIntro}
               </p>
             </div>
             <Link to="/trendy" className="trend-button">
-              Przeglądaj inspiracje
+              {t.trendsCta}
             </Link>
           </div>
 
@@ -144,7 +148,7 @@ function Home() {
           {/* Kafelek 6 - Tekst końcowy */}
           <div className="trend-card trend-outro">
             <p className="trend-outro-text">
-              Poznaj aktualne kolekcje tkanin, inspiracje oraz trendy rynkowe, które pomogą Ci w wyborze idealnych materiałów do Twoich projektów.
+              {t.trendsOutro}
             </p>
           </div>
         </div>

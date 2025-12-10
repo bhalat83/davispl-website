@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations';
 import './Oferta.css';
 
 function Oferta() {
+  const { language } = useLanguage();
+  const t = translations[language].offer;
+
   return (
     <div className="oferta">
       {/* Hero Section - Usługa pikowania */}
@@ -9,18 +14,18 @@ function Oferta() {
         <div className="oferta-hero-container">
           {/* Left Column - 40% */}
           <div className="oferta-hero-content">
-            <div className="oferta-subtitle">Oferujemy</div>
-            <h1 className="oferta-title">Usługę pikowania</h1>
+            <div className="oferta-subtitle">{t.weOffer}</div>
+            <h1 className="oferta-title">{t.quiltingTitle}</h1>
             <p className="oferta-description">
-              Nadaj swoim produktom wyjątkowy wygląd dzięki precyzyjnemu pikowaniu.
+              {t.quiltingDescription}
             </p>
             <ul className="oferta-list">
-              <li>Tworzymy unikalne wzory, które dodają głębi i elegancji tkaninom.</li>
-              <li>Oferujemy szeroki wybór technik i konfiguracji, dostosowanych do Twoich potrzeb.</li>
-              <li>Gwarantujemy trwałość pikowania dzięki nowoczesnym maszynom i najwyższej jakości materiałom.</li>
+              <li>{t.quiltingFeature1}</li>
+              <li>{t.quiltingFeature2}</li>
+              <li>{t.quiltingFeature3}</li>
             </ul>
             <Link to="/kontakt" className="oferta-button">
-              Zapytaj o ofertę
+              {t.askForOffer}
             </Link>
           </div>
 
@@ -41,18 +46,18 @@ function Oferta() {
 
           {/* Right Column - 40% - Content */}
           <div className="oferta-hero-content">
-            <div className="oferta-subtitle">Oferujemy</div>
-            <h1 className="oferta-title">Indywidualne printy</h1>
+            <div className="oferta-subtitle">{t.weOffer}</div>
+            <h1 className="oferta-title">{t.printsTitle}</h1>
             <p className="oferta-description">
-              Nadaj swoim produktom wyjątkowy wygląd dzięki precyzyjnemu pikowaniu.
+              {t.printsDescription}
             </p>
             <ul className="oferta-list">
-              <li>Tworzymy unikalne wzory, które dodają głębi i elegancji tkaninom.</li>
-              <li>Oferujemy szeroki wybór technik i konfiguracji, dostosowanych do Twoich potrzeb.</li>
-              <li>Gwarantujemy trwałość pikowania dzięki nowoczesnym maszynom i najwyższej jakości materiałom.</li>
+              <li>{t.printsFeature1}</li>
+              <li>{t.printsFeature2}</li>
+              <li>{t.printsFeature3}</li>
             </ul>
             <Link to="/kontakt" className="oferta-button">
-              Zapytaj o ofertę
+              {t.askForOffer}
             </Link>
           </div>
         </div>
@@ -63,18 +68,18 @@ function Oferta() {
         <div className="oferta-hero-container">
           {/* Left Column - 40% */}
           <div className="oferta-hero-content">
-            <div className="oferta-subtitle">Wyróżnij swoją markę, dzięki</div>
-            <h1 className="oferta-title">Usłudze marketingu</h1>
+            <div className="oferta-subtitle">{t.distinguishYourBrand}</div>
+            <h1 className="oferta-title">{t.marketingTitle}</h1>
             <p className="oferta-description">
-              Nadaj swoim produktom wyjątkowy wygląd dzięki precyzyjnemu pikowaniu.
+              {t.marketingDescription}
             </p>
             <ul className="oferta-list">
-              <li>Tworzymy unikalne wzory, które dodają głębi i elegancji tkaninom.</li>
-              <li>Oferujemy szeroki wybór technik i konfiguracji, dostosowanych do Twoich potrzeb.</li>
-              <li>Gwarantujemy trwałość pikowania dzięki nowoczesnym maszynom i najwyższej jakości materiałom.</li>
+              <li>{t.marketingFeature1}</li>
+              <li>{t.marketingFeature2}</li>
+              <li>{t.marketingFeature3}</li>
             </ul>
             <Link to="/kontakt" className="oferta-button">
-              Zapytaj o ofertę
+              {t.askForOffer}
             </Link>
           </div>
 
@@ -89,7 +94,7 @@ function Oferta() {
       <section className="oferta-about">
         <div className="oferta-about-container">
           <p className="oferta-about-text">
-            W Davis Fabrics łączymy pasję do designu z odpowiedzialnością za środowisko, oferując innowacyjne rozwiązania, które harmonijnie wpisują się w potrzeby współczesnych wnętrz. Nasze materiały powstają z myślą o trwałości, estetyce i zrównoważonym rozwoju, aby każdy projekt mógł być nie tylko wyjątkowy, ale także przyjazny dla natury.
+            {t.aboutText}
           </p>
         </div>
       </section>
@@ -100,15 +105,13 @@ function Oferta() {
           <div className="oferta-davis-home-container">
             {/* Left Column - 50% */}
             <div className="oferta-davis-home-content">
-              <div className="oferta-davis-home-subtitle">Davis Home</div>
-              <h2 className="oferta-davis-home-title">Szwalnia</h2>
+              <div className="oferta-davis-home-subtitle">{t.davisHomeSubtitle}</div>
+              <h2 className="oferta-davis-home-title">{t.davisHomeTitle}</h2>
               <p className="oferta-davis-home-description">
-                Davis Home to nasza dedykowana szwalnia, gdzie z pasją tworzymy wyjątkowe tekstylia domowe, takie jak poduszki dekoracyjne, narzuty oraz akcesoria dla dzieci i zwierząt domowych.
-                <br /><br />
-                Każdy produkt powstaje z dbałością o najdrobniejsze detale, łącząc funkcjonalność z estetyką, aby wprowadzić do Twojego domu ciepło i styl. Nasze kolekcje są inspirowane najnowszymi trendami w designie, dzięki czemu komponują się z różnorodnymi aranżacjami wnętrz.
+                {t.davisHomeDescription}
               </p>
               <Link to="/kontakt" className="oferta-davis-home-button">
-                Poznaj Davis Home
+                {t.davisHomeCta}
               </Link>
             </div>
 
@@ -131,15 +134,13 @@ function Oferta() {
 
             {/* Right Column - 50% - Content */}
             <div className="oferta-davis-home-content">
-              <div className="oferta-davis-home-subtitle">Davis Home</div>
-              <h2 className="oferta-davis-home-title">Szwalnia</h2>
+              <div className="oferta-davis-home-subtitle">{t.davisHomeSubtitle}</div>
+              <h2 className="oferta-davis-home-title">{t.davisHomeTitle}</h2>
               <p className="oferta-davis-home-description">
-                Davis Home to nasza dedykowana szwalnia, gdzie z pasją tworzymy wyjątkowe tekstylia domowe, takie jak poduszki dekoracyjne, narzuty oraz akcesoria dla dzieci i zwierząt domowych.
-                <br /><br />
-                Każdy produkt powstaje z dbałością o najdrobniejsze detale, łącząc funkcjonalność z estetyką, aby wprowadzić do Twojego domu ciepło i styl. Nasze kolekcje są inspirowane najnowszymi trendami w designie, dzięki czemu komponują się z różnorodnymi aranżacjami wnętrz.
+                {t.davisHomeDescription}
               </p>
               <Link to="/kontakt" className="oferta-davis-home-button">
-                Poznaj Davis Home
+                {t.davisHomeCta}
               </Link>
             </div>
           </div>

@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations';
 import CollectionCard from '../components/CollectionCard';
 import './Trendy.css';
 
 function Trendy() {
+  const { language } = useLanguage();
+  const t = translations[language].trends;
   const [currentImageSlide, setCurrentImageSlide] = useState(0);
   const [collections, setCollections] = useState([]);
   const [currentCollectionSlide, setCurrentCollectionSlide] = useState(0);
@@ -69,15 +73,13 @@ function Trendy() {
           <div className="trendy-hero-container">
             {/* Left Column - 40% */}
             <div className="trendy-hero-content">
-              <div className="trendy-date">1910 - 1980</div>
-              <h1 className="trendy-title">Modernism</h1>
+              <div className="trendy-date">{t.modernismDate}</div>
+              <h1 className="trendy-title">{t.modernismTitle}</h1>
               <p className="trendy-description">
-                Modernizm to styl, który celebruje prostotę i funkcjonalność, tworząc przestrzenie idealne dla miłośników współczesnego designu. Kolekcja "Modernism" łączy minimalistyczne wzory z neutralnymi, stonowanymi kolorami, tworząc tkaniny, które harmonijnie wpisują się w nowoczesne wnętrza.
-                <br /><br />
-                Każdy detal został zaprojektowany z myślą o estetyce i praktyczności, dzięki czemu ta linia jest odpowiedzią na potrzeby osób ceniących przestrzeń, światło i elegancję.
+                {t.modernismDescription}
               </p>
               <Link to="/kolekcje" className="trendy-button">
-                Zobacz kolekcje
+                {t.seeCollections}
               </Link>
             </div>
 
@@ -115,7 +117,7 @@ function Trendy() {
                   <path d="M9 9L15 15M15 9L9 15" />
                 </svg>
               </div>
-              <p className="feature-text">Prostota i minimalistyczna forma jako fundament współczesnego designu</p>
+              <p className="feature-text">{t.feature1}</p>
             </div>
             <div className="feature-item">
               <div className="feature-icon">
@@ -124,7 +126,7 @@ function Trendy() {
                   <path d="M9 9L15 15M15 9L9 15" />
                 </svg>
               </div>
-              <p className="feature-text">Geometria jako podstawa struktury i estetyki</p>
+              <p className="feature-text">{t.feature2}</p>
             </div>
             <div className="feature-item">
               <div className="feature-icon">
@@ -133,7 +135,7 @@ function Trendy() {
                   <path d="M9 9L15 15M15 9L9 15" />
                 </svg>
               </div>
-              <p className="feature-text">Stonowana paleta barw, która wprowadza harmonię oraz spokój</p>
+              <p className="feature-text">{t.feature3}</p>
             </div>
           </div>
         </section>
@@ -142,10 +144,10 @@ function Trendy() {
         <section className="trendy-collections">
           <div className="trendy-collections-container">
             <div className="trendy-collections-header">
-              <h2 className="trendy-collections-title">Produkty w stylu Modernism</h2>
+              <h2 className="trendy-collections-title">{t.productsInStyle} {t.modernismTitle}</h2>
               <div className="trendy-collections-controls">
                 <Link to="/kolekcje" className="view-all-btn">
-                  PRZEJDŹ DO KOLEKCJI ↗
+                  {t.viewAllCollections}
                 </Link>
                 <div className="carousel-controls">
                   <button onClick={prevCollectionSlide} className="carousel-btn carousel-prev" disabled={currentCollectionSlide === 0}>
@@ -178,15 +180,13 @@ function Trendy() {
         <section className="trendy-hero">
           <div className="trendy-hero-container">
             <div className="trendy-hero-content">
-              <div className="trendy-date">1960 - 1980</div>
-              <h1 className="trendy-title">Boho</h1>
+              <div className="trendy-date">{t.bohoDate}</div>
+              <h1 className="trendy-title">{t.bohoTitle}</h1>
               <p className="trendy-description">
-                Modernizm to styl, który celebruje prostotę i funkcjonalność, tworząc przestrzenie idealne dla miłośników współczesnego designu. Kolekcja "Modernism" łączy minimalistyczne wzory z neutralnymi, stonowanymi kolorami, tworząc tkaniny, które harmonijnie wpisują się w nowoczesne wnętrza.
-                <br /><br />
-                Każdy detal został zaprojektowany z myślą o estetyce i praktyczności, dzięki czemu ta linia jest odpowiedzią na potrzeby osób ceniących przestrzeń, światło i elegancję.
+                {t.modernismDescription}
               </p>
               <Link to="/kolekcje" className="trendy-button">
-                Zobacz kolekcje
+                {t.seeCollections}
               </Link>
             </div>
             <div className="trendy-hero-images">
@@ -221,7 +221,7 @@ function Trendy() {
                   <path d="M9 9L15 15M15 9L9 15" />
                 </svg>
               </div>
-              <p className="feature-text">Prostota i minimalistyczna forma jako fundament współczesnego designu</p>
+              <p className="feature-text">{t.feature1}</p>
             </div>
             <div className="feature-item">
               <div className="feature-icon">
@@ -230,7 +230,7 @@ function Trendy() {
                   <path d="M9 9L15 15M15 9L9 15" />
                 </svg>
               </div>
-              <p className="feature-text">Geometria jako podstawa struktury i estetyki</p>
+              <p className="feature-text">{t.feature2}</p>
             </div>
             <div className="feature-item">
               <div className="feature-icon">
@@ -239,7 +239,7 @@ function Trendy() {
                   <path d="M9 9L15 15M15 9L9 15" />
                 </svg>
               </div>
-              <p className="feature-text">Stonowana paleta barw, która wprowadza harmonię oraz spokój</p>
+              <p className="feature-text">{t.feature3}</p>
             </div>
           </div>
         </section>
@@ -247,10 +247,10 @@ function Trendy() {
         <section className="trendy-collections">
           <div className="trendy-collections-container">
             <div className="trendy-collections-header">
-              <h2 className="trendy-collections-title">Produkty w stylu Boho</h2>
+              <h2 className="trendy-collections-title">{t.productsInStyle} {t.bohoTitle}</h2>
               <div className="trendy-collections-controls">
                 <Link to="/kolekcje" className="view-all-btn">
-                  PRZEJDŹ DO KOLEKCJI ↗
+                  {t.viewAllCollections}
                 </Link>
                 <div className="carousel-controls">
                   <button onClick={prevCollectionSlide} className="carousel-btn carousel-prev" disabled={currentCollectionSlide === 0}>
@@ -283,15 +283,13 @@ function Trendy() {
         <section className="trendy-hero">
           <div className="trendy-hero-container">
             <div className="trendy-hero-content">
-              <div className="trendy-date">1940 - 1970</div>
-              <h1 className="trendy-title">Mid Century</h1>
+              <div className="trendy-date">{t.midCenturyDate}</div>
+              <h1 className="trendy-title">{t.midCenturyTitle}</h1>
               <p className="trendy-description">
-                Modernizm to styl, który celebruje prostotę i funkcjonalność, tworząc przestrzenie idealne dla miłośników współczesnego designu. Kolekcja "Modernism" łączy minimalistyczne wzory z neutralnymi, stonowanymi kolorami, tworząc tkaniny, które harmonijnie wpisują się w nowoczesne wnętrza.
-                <br /><br />
-                Każdy detal został zaprojektowany z myślą o estetyce i praktyczności, dzięki czemu ta linia jest odpowiedzią na potrzeby osób ceniących przestrzeń, światło i elegancję.
+                {t.modernismDescription}
               </p>
               <Link to="/kolekcje" className="trendy-button">
-                Zobacz kolekcje
+                {t.seeCollections}
               </Link>
             </div>
             <div className="trendy-hero-images">
@@ -326,7 +324,7 @@ function Trendy() {
                   <path d="M9 9L15 15M15 9L9 15" />
                 </svg>
               </div>
-              <p className="feature-text">Prostota i minimalistyczna forma jako fundament współczesnego designu</p>
+              <p className="feature-text">{t.feature1}</p>
             </div>
             <div className="feature-item">
               <div className="feature-icon">
@@ -335,7 +333,7 @@ function Trendy() {
                   <path d="M9 9L15 15M15 9L9 15" />
                 </svg>
               </div>
-              <p className="feature-text">Geometria jako podstawa struktury i estetyki</p>
+              <p className="feature-text">{t.feature2}</p>
             </div>
             <div className="feature-item">
               <div className="feature-icon">
@@ -344,7 +342,7 @@ function Trendy() {
                   <path d="M9 9L15 15M15 9L9 15" />
                 </svg>
               </div>
-              <p className="feature-text">Stonowana paleta barw, która wprowadza harmonię oraz spokój</p>
+              <p className="feature-text">{t.feature3}</p>
             </div>
           </div>
         </section>
@@ -352,10 +350,10 @@ function Trendy() {
         <section className="trendy-collections">
           <div className="trendy-collections-container">
             <div className="trendy-collections-header">
-              <h2 className="trendy-collections-title">Produkty w stylu Mid Century</h2>
+              <h2 className="trendy-collections-title">{t.productsInStyle} {t.midCenturyTitle}</h2>
               <div className="trendy-collections-controls">
                 <Link to="/kolekcje" className="view-all-btn">
-                  PRZEJDŹ DO KOLEKCJI ↗
+                  {t.viewAllCollections}
                 </Link>
                 <div className="carousel-controls">
                   <button onClick={prevCollectionSlide} className="carousel-btn carousel-prev" disabled={currentCollectionSlide === 0}>
@@ -388,15 +386,13 @@ function Trendy() {
         <section className="trendy-hero">
           <div className="trendy-hero-container">
             <div className="trendy-hero-content">
-              <div className="trendy-date">1880 - 1920</div>
-              <h1 className="trendy-title">Classic Eclecticism</h1>
+              <div className="trendy-date">{t.classicDate}</div>
+              <h1 className="trendy-title">{t.classicTitle}</h1>
               <p className="trendy-description">
-                Modernizm to styl, który celebruje prostotę i funkcjonalność, tworząc przestrzenie idealne dla miłośników współczesnego designu. Kolekcja "Modernism" łączy minimalistyczne wzory z neutralnymi, stonowanymi kolorami, tworząc tkaniny, które harmonijnie wpisują się w nowoczesne wnętrza.
-                <br /><br />
-                Każdy detal został zaprojektowany z myślą o estetyce i praktyczności, dzięki czemu ta linia jest odpowiedzią na potrzeby osób ceniących przestrzeń, światło i elegancję.
+                {t.modernismDescription}
               </p>
               <Link to="/kolekcje" className="trendy-button">
-                Zobacz kolekcje
+                {t.seeCollections}
               </Link>
             </div>
             <div className="trendy-hero-images">
@@ -431,7 +427,7 @@ function Trendy() {
                   <path d="M9 9L15 15M15 9L9 15" />
                 </svg>
               </div>
-              <p className="feature-text">Prostota i minimalistyczna forma jako fundament współczesnego designu</p>
+              <p className="feature-text">{t.feature1}</p>
             </div>
             <div className="feature-item">
               <div className="feature-icon">
@@ -440,7 +436,7 @@ function Trendy() {
                   <path d="M9 9L15 15M15 9L9 15" />
                 </svg>
               </div>
-              <p className="feature-text">Geometria jako podstawa struktury i estetyki</p>
+              <p className="feature-text">{t.feature2}</p>
             </div>
             <div className="feature-item">
               <div className="feature-icon">
@@ -449,7 +445,7 @@ function Trendy() {
                   <path d="M9 9L15 15M15 9L9 15" />
                 </svg>
               </div>
-              <p className="feature-text">Stonowana paleta barw, która wprowadza harmonię oraz spokój</p>
+              <p className="feature-text">{t.feature3}</p>
             </div>
           </div>
         </section>
@@ -457,10 +453,10 @@ function Trendy() {
         <section className="trendy-collections">
           <div className="trendy-collections-container">
             <div className="trendy-collections-header">
-              <h2 className="trendy-collections-title">Produkty w stylu Classic Eclecticism</h2>
+              <h2 className="trendy-collections-title">{t.productsInStyle} {t.classicTitle}</h2>
               <div className="trendy-collections-controls">
                 <Link to="/kolekcje" className="view-all-btn">
-                  PRZEJDŹ DO KOLEKCJI ↗
+                  {t.viewAllCollections}
                 </Link>
                 <div className="carousel-controls">
                   <button onClick={prevCollectionSlide} className="carousel-btn carousel-prev" disabled={currentCollectionSlide === 0}>

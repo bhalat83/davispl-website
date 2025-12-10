@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { LanguageProvider } from './contexts/LanguageContext';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -13,24 +14,26 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Navigation />
-        <div style={{ flex: 1 }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/kolekcje" element={<Kolekcje />} />
-            <Route path="/kolekcje/:id" element={<KolekcjaDetails />} />
-            <Route path="/trendy" element={<Trendy />} />
-            <Route path="/oferta" element={<Oferta />} />
-            <Route path="/o-nas" element={<ONas />} />
-            <Route path="/do-pobrania" element={<DoPobrania />} />
-            <Route path="/kontakt" element={<Kontakt />} />
-          </Routes>
+    <LanguageProvider>
+      <Router>
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <Navigation />
+          <div style={{ flex: 1 }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/kolekcje" element={<Kolekcje />} />
+              <Route path="/kolekcje/:id" element={<KolekcjaDetails />} />
+              <Route path="/trendy" element={<Trendy />} />
+              <Route path="/oferta" element={<Oferta />} />
+              <Route path="/o-nas" element={<ONas />} />
+              <Route path="/do-pobrania" element={<DoPobrania />} />
+              <Route path="/kontakt" element={<Kontakt />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </Router>
+      </Router>
+    </LanguageProvider>
   );
 }
 

@@ -152,13 +152,12 @@ function KolekcjaDetails() {
 
           {/* Warianty kolorów */}
           {collection.variants && collection.variants.length > 0 && (
-            <div className="details-variants">
-              {collection.variants.slice(0, 16).map((variant, index) => (
+            <div className="details-variants" onMouseLeave={handleVariantLeave}>
+              {collection.variants.map((variant, index) => (
                 <div
                   key={variant.id}
                   className="variant-card"
                   onMouseEnter={() => handleVariantHover(variant.image)}
-                  onMouseLeave={handleVariantLeave}
                 >
                   <img
                     src={variant.image}

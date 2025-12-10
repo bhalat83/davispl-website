@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations';
 import CollectionCard from '../components/CollectionCard';
 import './Kolekcje.css';
 
 function Kolekcje() {
+  const { language } = useLanguage();
+  const t = translations[language].collections;
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,7 +26,7 @@ function Kolekcje() {
       );
 
       if (!response.ok) {
-        throw new Error('Nie udało się pobrać kolekcji');
+        throw new Error(t.errorFetch);
       }
 
       const data = await response.json();
@@ -88,7 +92,7 @@ function Kolekcje() {
   if (loading) {
     return (
       <div className="page">
-        <div className="collections-loading">Ładowanie kolekcji...</div>
+        <div className="collections-loading">{t.loading}</div>
       </div>
     );
   }
@@ -96,7 +100,7 @@ function Kolekcje() {
   if (error) {
     return (
       <div className="page">
-        <div className="collections-error">Błąd: {error}</div>
+        <div className="collections-error">{t.error}: {error}</div>
       </div>
     );
   }
@@ -104,7 +108,7 @@ function Kolekcje() {
   return (
     <div className="page">
       <div className="collections-header">
-        <h1>Kolekcje</h1>
+        <h1>{t.title}</h1>
       </div>
 
       <div className="collections-grid">
@@ -119,7 +123,7 @@ function Kolekcje() {
           disabled={currentPage === 1}
           className="pagination-btn"
         >
-          Poprzednia
+          {t.previous}
         </button>
 
         <div className="pagination-numbers">
@@ -139,7 +143,7 @@ function Kolekcje() {
           disabled={collections.length < perPage}
           className="pagination-btn"
         >
-          Następna
+          {t.next}
         </button>
       </div>
     </div>

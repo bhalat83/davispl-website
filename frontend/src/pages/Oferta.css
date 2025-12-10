@@ -1,5 +1,6 @@
 .oferta {
   width: 100%;
+  overflow-x: hidden;
 }
 
 /* Hero Section */
@@ -7,20 +8,22 @@
   width: 100%;
   padding: 60px 0;
   background-color: #fff;
+  overflow-x: hidden;
 }
 
 .oferta-hero-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 40px 0 70px;
+  padding: 0 70px;
   display: grid;
-  grid-template-columns: 40% 60%;
+  grid-template-columns: 2fr 3fr;
   gap: 60px;
   align-items: center;
+  overflow: hidden;
 }
 
 .oferta-hero-reversed {
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 3fr 2fr;
 }
 
 .oferta-hero-content {
@@ -132,12 +135,13 @@
   width: 100%;
   background-color: #fff;
   padding: 120px 0;
+  overflow-x: hidden;
 }
 
 .oferta-about-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -160,15 +164,15 @@
 .oferta-davis-home {
   width: 100%;
   padding: 0;
-  overflow: visible;
+  overflow: hidden;
   margin-bottom: 120px;
 }
 
 .oferta-davis-home-wrapper {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 40px 0 70px;
-  overflow: visible;
+  padding: 0 70px;
+  overflow: hidden;
 }
 
 .oferta-davis-home-container {
@@ -177,6 +181,7 @@
   gap: 0;
   align-items: stretch;
   position: relative;
+  overflow: hidden;
 }
 
 .oferta-davis-home-content {
@@ -250,7 +255,7 @@
 
 .oferta-davis-home-image {
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -259,11 +264,11 @@
 }
 
 .oferta-davis-home-image img {
-  width: 140%;
+  width: 100%;
   height: auto;
   object-fit: cover;
   display: block;
-  margin-right: -100px;
+  margin-right: 0;
 }
 
 /* Davis Home Reversed - Gray Background */
@@ -304,14 +309,14 @@
 
 .oferta-davis-home-reversed .oferta-davis-home-image img {
   margin-right: 0;
-  margin-left: -100px;
+  margin-left: 0;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .oferta-hero-container {
     grid-template-columns: 1fr;
-    padding: 0 20px 0 40px;
+    padding: 0 40px;
   }
 
   .oferta-title {
@@ -323,7 +328,7 @@
   }
 
   .oferta-about-container {
-    padding: 0 20px;
+    padding: 0 40px;
   }
 
   .oferta-about-text {
@@ -332,7 +337,6 @@
 
   .oferta-davis-home-container {
     grid-template-columns: 1fr;
-    padding: 0 20px 0 40px;
   }
 
   .oferta-davis-home-title {
@@ -340,7 +344,7 @@
   }
 
   .oferta-davis-home-wrapper {
-    padding: 0 20px 0 40px;
+    padding: 0 40px;
   }
 
   .oferta-davis-home-container {

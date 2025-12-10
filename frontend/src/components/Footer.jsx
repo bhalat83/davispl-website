@@ -6,8 +6,8 @@ function Footer() {
       <div className="footer-container">
         <div className="footer-left">
           <span>DAVIS FABRICS</span>
-          <span>ul. Miłosna</span>
-          <span>37 43-346 Bielsko-Biała</span>
+          <span>ul. Miłosna 37</span>
+          <span>43-346 Bielsko-Biała</span>
         </div>
         <div className="footer-right">
           <a href="https://www.linkedin.com/company/davis-fabrics/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LINKEDIN</a>

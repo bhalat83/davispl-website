@@ -1,5 +1,6 @@
 .trendy {
   width: 100%;
+  overflow-x: hidden;
 }
 
 /* Hero Section */
@@ -7,6 +8,7 @@
   width: 100%;
   padding: 120px 0;
   overflow: hidden;
+  overflow-x: hidden;
   background-color: #fff;
 }
 
@@ -29,9 +31,9 @@
 .trendy-hero-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 40px 0 70px;
+  padding: 0 70px;
   display: grid;
-  grid-template-columns: 40% 60%;
+  grid-template-columns: 2fr 3fr;
   gap: 60px;
   align-items: center;
 }
@@ -42,8 +44,7 @@
   gap: 24px;
   z-index: 2;
   position: relative;
-  padding: 60px;
-  align-self: center;
+  padding: 0 40px 0 0;
 }
 
 .trendy-date {
@@ -109,14 +110,17 @@
   position: relative;
   width: 100%;
   padding-right: 0;
-  overflow: visible;
+  overflow: hidden;
   z-index: 1;
-  margin-left: -60px;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .trendy-carousel {
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
   position: relative;
 }
 
@@ -144,7 +148,7 @@
   display: flex;
   gap: 16px;
   margin-top: 24px;
-  padding: 40px 40px 40px 0px;
+  padding: 40px 0px;
   justify-content: flex-end;
 }
 
@@ -153,12 +157,13 @@
   width: 100%;
   padding: 60px 0;
   background-color: #fff;
+  overflow-x: hidden;
 }
 
 .trendy-features-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 40px 0 70px;
+  padding: 0 70px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
@@ -210,13 +215,14 @@
   width: 100%;
   padding: 120px 0;
   background-color: #fff;
+  overflow-x: hidden;
 }
 
 .trendy-collections-container {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 0px;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .trendy-collections-header {
@@ -224,7 +230,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 48px;
-  padding-left: 30px;
+  padding: 0 70px;
 }
 
 .trendy-collections-title {
@@ -291,10 +297,10 @@
 }
 
 .carousel {
-  overflow: visible;
+  overflow: hidden;
   width: 100%;
   position: relative;
-  margin-left: 30px;
+  margin-left: 70px;
 }
 
 .carousel-track {
@@ -313,7 +319,7 @@
 @media (max-width: 768px) {
   .trendy-hero-container {
     grid-template-columns: 1fr;
-    padding: 0 20px 0 40px;
+    padding: 0 40px;
   }
 
   .trendy-title {
@@ -322,18 +328,18 @@
 
   .trendy-features-container {
     grid-template-columns: 1fr;
-    padding: 0 20px 0 40px;
+    padding: 0 40px;
   }
 
   .trendy-collections-container {
-    padding: 0 20px;
+    padding: 0 40px;
   }
 
   .trendy-collections-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
-    padding-left: 20px;
+    padding: 0 40px;
   }
 
   .trendy-collections-title {
@@ -344,6 +350,10 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
+  }
+
+  .carousel {
+    margin-left: 40px;
   }
 
   .carousel-item {

@@ -1,0 +1,380 @@
+.onas {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.onas-hero {
+  width: 100%;
+  padding: 120px 0;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+.onas-hero-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 70px;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.onas-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.onas-title {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 0;
+}
+
+.onas-description {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 160%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 0;
+}
+
+.onas-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.onas-point {
+  display: flex;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.onas-point:last-child {
+  border-bottom: none;
+}
+
+.onas-point-number {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: #000;
+  flex-shrink: 0;
+}
+
+.onas-point-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.onas-point-title {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 0;
+}
+
+.onas-point-description {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 160%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 0;
+}
+
+.onas-hero-image {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.onas-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Timeline Section */
+.onas-timeline {
+  width: 100%;
+  padding: 120px 0;
+  background-color: #F7F7F7;
+  overflow-x: hidden;
+}
+
+.onas-timeline-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 70px;
+  position: relative;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  background-color: #E0E0E0;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  margin-bottom: 80px;
+  position: relative;
+}
+
+.timeline-item:first-child {
+  margin-top: 0;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Left side items */
+.timeline-left {
+  grid-template-areas: "content marker empty";
+}
+
+.timeline-left .timeline-content {
+  grid-area: content;
+  text-align: right;
+  padding-right: 120px;
+}
+
+.timeline-left .timeline-marker {
+  grid-area: marker;
+}
+
+/* Right side items */
+.timeline-right {
+  grid-template-areas: "empty marker content";
+}
+
+.timeline-right .timeline-content {
+  grid-area: content;
+  text-align: left;
+  padding-left: 120px;
+}
+
+.timeline-right .timeline-marker {
+  grid-area: marker;
+}
+
+.timeline-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.timeline-date {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: #666;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.timeline-title {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 120%;
+  letter-spacing: 0%;
+  color: #000;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.timeline-description {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 160%;
+  letter-spacing: 0%;
+  color: #666;
+  margin: 0;
+}
+
+.timeline-marker {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 2;
+  padding-top: 8px;
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #666;
+  border-radius: 50%;
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+}
+
+.timeline-connector {
+  position: absolute;
+  height: 2px;
+  width: 80px;
+  background-color: #666;
+  z-index: 1;
+  top: 14px;
+}
+
+.timeline-left .timeline-connector {
+  right: 12px;
+}
+
+.timeline-right .timeline-connector {
+  left: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .onas-hero-container {
+    grid-template-columns: 1fr;
+    padding: 0 40px;
+    gap: 40px;
+  }
+
+  .onas-title {
+    font-size: 32px;
+  }
+
+  .onas-hero {
+    padding: 80px 0;
+  }
+
+  .onas-point {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .onas-timeline {
+    padding: 80px 0;
+  }
+
+  .onas-timeline-container {
+    padding: 0 40px;
+  }
+
+  .timeline-line {
+    left: 20px;
+    top: 14px;
+    bottom: 14px;
+  }
+
+  .timeline-item {
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "marker content";
+    margin-bottom: 60px;
+  }
+
+  .timeline-left,
+  .timeline-right {
+    grid-template-areas: "marker content";
+  }
+
+  .timeline-left .timeline-content,
+  .timeline-right .timeline-content {
+    text-align: left;
+    padding-left: 80px;
+    padding-right: 0;
+  }
+
+  .timeline-connector {
+    width: 80px !important;
+  }
+
+  .timeline-right .timeline-connector,
+  .timeline-left .timeline-connector {
+    left: 12px;
+    right: auto;
+  }
+
+  .timeline-title {
+    font-size: 20px;
+  }
+}
+
+/* About Text Section */
+.onas-about-section {
+  width: 100%;
+  background-color: #F7F7F7;
+  padding: 120px 0;
+  overflow-x: hidden;
+}
+
+.onas-about-section-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.onas-about-section-text {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 160%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #000;
+  margin: 0;
+  max-width: 900px;
+}
+
+/* Responsive for About Text Section */
+@media (max-width: 768px) {
+  .onas-about-section {
+    padding: 80px 0;
+  }
+
+  .onas-about-section-container {
+    padding: 0 40px;
+  }
+
+  .onas-about-section-text {
+    font-size: 20px;
+  }
+}

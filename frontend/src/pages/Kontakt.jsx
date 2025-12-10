@@ -1,19 +1,23 @@
 import { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations';
 import './Kontakt.css';
 
 function Kontakt() {
-  const [selectedRegion1, setSelectedRegion1] = useState('');
-  const [selectedRegion2, setSelectedRegion2] = useState('');
-  const [selectedRegion3, setSelectedRegion3] = useState('');
+  const { language } = useLanguage();
+  const t = translations[language].contact;
+  const [selectedRegion1, setSelectedRegion1] = useState('dolnośląskie');
+  const [selectedRegion2, setSelectedRegion2] = useState('kujawsko-pomorskie');
+  const [selectedRegion3, setSelectedRegion3] = useState('lubelskie');
 
   const departments = [
-    'Dział sprzedaży',
-    'Biuro zarządu',
-    'Dział księgowy',
-    'Dział marketingu',
-    'Dział personalny',
-    'Dział reklamacji',
-    'Showroom Davis Home'
+    t.salesDepartment,
+    t.management,
+    t.accounting,
+    t.marketing,
+    t.hr,
+    t.complaints,
+    t.showroom
   ];
 
   // Dane handlowców przypisanych do województw
@@ -182,17 +186,118 @@ function Kontakt() {
 
   const regions = Object.keys(salesData);
 
+  const wholesalers = [
+    {
+      name: "Hurtownia Davis",
+      address: ["ul. Cło 31A, Hala nr 1", "63-604 Baranów"],
+      phones: ["+48 571 600 650"],
+      email: "hurtownia@davis.pl",
+      website: null
+    },
+    {
+      name: "Kornix Forest",
+      address: ["ul. Podmiejska 12", "84-200 Wejherowo"],
+      phones: ["+48 58 677 98 02", "+48 668 497 479"],
+      email: null,
+      website: "kornix.com.pl"
+    },
+    {
+      name: "Prohurt",
+      address: ["36-073 Strażów 351"],
+      phones: ["17 77 11 554", "+48 733 701 731"],
+      email: null,
+      website: "prohurt.pl"
+    },
+    {
+      name: "Megab",
+      address: ["Rynek 30", "34-130 Kalwaria Zebrzydowska"],
+      phones: ["+48 33 876 49 20"],
+      email: "mazuga@vp.pl",
+      website: "www.magab.pl"
+    },
+    {
+      name: "Atena",
+      address: ["ul. Polna 3a", "34-140 Kalwaria Zebrzydowska"],
+      phones: ["+48 33 876 49 72"],
+      email: null,
+      website: "atena-kalwaria.pl"
+    },
+    {
+      name: "Materiały tapicerskie Plich",
+      address: ["Rynek 18 b", "34-130 Kalwaria Zebrzydowska"],
+      phones: ["+48 506 106 205"],
+      email: null,
+      website: null
+    },
+    {
+      name: "Artmeb",
+      address: ["ul. Wrocławska 5", "63-600 Kępno"],
+      phones: ["+48 502 444 222"],
+      email: null,
+      website: "artmeb-hurt.pl"
+    },
+    {
+      name: "Mati",
+      address: ["ul. Wrzesińska 102", "62-020 Swarzędz"],
+      phones: ["+48 61 651 08 08"],
+      email: "biuro@pwmati.pl",
+      website: null
+    },
+    {
+      name: "Dar-Tex",
+      address: ["ul. Kościuszki 22", "42-500 Będzin"],
+      phones: ["+48 32 761 54 97"],
+      email: null,
+      website: "dar-tex.pl"
+    },
+    {
+      name: "Wera",
+      address: ["ul. Dworcowa 46", "89-530 Śliwice"],
+      phones: ["+48 52 334 01 36"],
+      email: null,
+      website: "tkaniny-wera.pl"
+    },
+    {
+      name: "MT Filipowicz",
+      address: ["ul. Płk. Dąbka 10", "30-732 Kraków"],
+      phones: ["+48 12 429 21 34"],
+      email: null,
+      website: "www.artykulytapicerskie.pl"
+    },
+    {
+      name: "Tkaniny Karoliny",
+      address: ["Kokosowa 40", "02-797 Warszawa"],
+      phones: ["+48 22 245 03 72", "+48 605 141 363"],
+      email: null,
+      website: "www.tkaninykaroliny.pl"
+    },
+    {
+      name: "Jardex",
+      address: ["ul. Rolnicza 8", "44-240 Żory"],
+      phones: ["+48 726 430 300", "+48 32 43 58 141"],
+      email: null,
+      website: "www.jardex.com.pl"
+    },
+    {
+      name: "ARKOS Hurtownia Tapicerska",
+      address: ["ul. Brzeźnicka 59", "97-500 Radomsko"],
+      phones: ["+48 697 555 567"],
+      email: "kosmala82@o2.pl",
+      website: null
+    }
+  ];
+
   return (
     <div className="kontakt">
       {/* Contact Section */}
       <section className="kontakt-section">
         <div className="kontakt-container">
-          <h1 className="kontakt-main-title">Kontakt</h1>
+          <h1 className="kontakt-main-title">{t.title}</h1>
 
           <div className="kontakt-grid">
             {/* Column 1 - Company Data */}
             <div className="kontakt-column">
-              <h2 className="kontakt-company-name">Davis Fabrics Sp. z o.o.</h2>
+              <h2 className="kontakt-company-name">{t.companyName}</h2>
               <div className="kontakt-info">
                 <p>ul. Miłosna 37</p>
                 <p>43–346 Bielsko-Biała</p>
@@ -245,16 +350,16 @@ function Kontakt() {
             {/* Column 1 */}
             <div className="kontakt-sales-column">
               <div className="kontakt-sales-header">
-                <h2>Dział sprzedaży krajowej</h2>
+                <h2>{t.domesticSales}</h2>
               </div>
               <div className="kontakt-sales-content">
-                <label className="kontakt-sales-label">Wybierz region:</label>
+                <label className="kontakt-sales-label">{t.selectRegion}</label>
                 <select
                   className="kontakt-sales-select"
                   value={selectedRegion1}
                   onChange={(e) => setSelectedRegion1(e.target.value)}
                 >
-                  <option value="">Wybierz województwo</option>
+                  <option value="">{t.selectVoivodeship}</option>
                   {regions.map((region) => (
                     <option key={region} value={region}>
                       {region}
@@ -290,16 +395,16 @@ function Kontakt() {
             {/* Column 2 */}
             <div className="kontakt-sales-column">
               <div className="kontakt-sales-header">
-                <h2>Dział sprzedaży krajowej</h2>
+                <h2>{t.domesticSales}</h2>
               </div>
               <div className="kontakt-sales-content">
-                <label className="kontakt-sales-label">Wybierz region:</label>
+                <label className="kontakt-sales-label">{t.selectRegion}</label>
                 <select
                   className="kontakt-sales-select"
                   value={selectedRegion2}
                   onChange={(e) => setSelectedRegion2(e.target.value)}
                 >
-                  <option value="">Wybierz województwo</option>
+                  <option value="">{t.selectVoivodeship}</option>
                   {regions.map((region) => (
                     <option key={region} value={region}>
                       {region}
@@ -335,16 +440,16 @@ function Kontakt() {
             {/* Column 3 */}
             <div className="kontakt-sales-column">
               <div className="kontakt-sales-header">
-                <h2>Dział sprzedaży krajowej</h2>
+                <h2>{t.domesticSales}</h2>
               </div>
               <div className="kontakt-sales-content">
-                <label className="kontakt-sales-label">Wybierz region:</label>
+                <label className="kontakt-sales-label">{t.selectRegion}</label>
                 <select
                   className="kontakt-sales-select"
                   value={selectedRegion3}
                   onChange={(e) => setSelectedRegion3(e.target.value)}
                 >
-                  <option value="">Wybierz województwo</option>
+                  <option value="">{t.selectVoivodeship}</option>
                   {regions.map((region) => (
                     <option key={region} value={region}>
                       {region}
@@ -376,6 +481,46 @@ function Kontakt() {
                 )}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Wholesalers Section */}
+      <section className="kontakt-section">
+        <div className="kontakt-container">
+          <h1 className="kontakt-main-title">{t.wholesalersTitle}</h1>
+
+          <div className="kontakt-wholesalers-grid">
+            {wholesalers.map((wholesaler, index) => (
+              <div key={index} className="kontakt-department">
+                <h3 className="kontakt-department-name">{wholesaler.name}</h3>
+                <div className="kontakt-info">
+                  {wholesaler.address.map((line, i) => (
+                    <p key={i}>{line}</p>
+                  ))}
+                  {wholesaler.phones.map((phone, i) => (
+                    <a key={i} href={`tel:${phone.replace(/\s/g, '')}`} className="kontakt-phone">
+                      {phone}
+                    </a>
+                  ))}
+                  {wholesaler.email && (
+                    <a href={`mailto:${wholesaler.email}`} className="kontakt-email">
+                      {wholesaler.email}
+                    </a>
+                  )}
+                  {wholesaler.website && (
+                    <a
+                      href={`https://${wholesaler.website}`}
+                      className="kontakt-email"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {wholesaler.website}
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
