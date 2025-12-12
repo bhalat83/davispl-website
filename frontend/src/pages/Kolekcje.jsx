@@ -121,9 +121,9 @@ function Kolekcje() {
         <button
           onClick={handlePrevPage}
           disabled={currentPage === 1}
-          className="pagination-btn"
+          className="pagination-btn pagination-arrow"
         >
-          {t.previous}
+          ←
         </button>
 
         <div className="pagination-numbers">
@@ -141,9 +141,9 @@ function Kolekcje() {
         <button
           onClick={handleNextPage}
           disabled={collections.length < perPage}
-          className="pagination-btn"
+          className="pagination-btn pagination-arrow"
         >
-          {t.next}
+          →
         </button>
       </div>
     </div>

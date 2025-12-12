@@ -267,10 +267,33 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .onas-hero-container {
     grid-template-columns: 1fr;
     padding: 0 40px;
+    gap: 48px;
+  }
+
+  .timeline-left .timeline-content {
+    padding-right: 80px;
+  }
+
+  .timeline-right .timeline-content {
+    padding-left: 80px;
+  }
+
+  .onas-timeline-container {
+    padding: 0 40px;
+  }
+
+  .onas-about-section-container {
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .onas-hero-container {
+    padding: 0 24px;
     gap: 40px;
   }
 
@@ -292,7 +315,7 @@
   }
 
   .onas-timeline-container {
-    padding: 0 40px;
+    padding: 0 24px;
   }
 
   .timeline-line {
@@ -331,6 +354,78 @@
 
   .timeline-title {
     font-size: 20px;
+  }
+
+  .onas-about-section-container {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .onas-hero {
+    padding: 60px 0;
+  }
+
+  .onas-hero-container {
+    padding: 0 20px;
+    gap: 32px;
+  }
+
+  .onas-title {
+    font-size: 28px;
+  }
+
+  .onas-point {
+    padding: 20px 0;
+  }
+
+  .onas-point-title {
+    font-size: 18px;
+  }
+
+  .onas-timeline {
+    padding: 60px 0;
+  }
+
+  .onas-timeline-container {
+    padding: 0 20px;
+  }
+
+  .timeline-line {
+    left: 16px;
+  }
+
+  .timeline-item {
+    margin-bottom: 48px;
+  }
+
+  .timeline-left .timeline-content,
+  .timeline-right .timeline-content {
+    padding-left: 60px;
+  }
+
+  .timeline-connector {
+    width: 60px !important;
+  }
+
+  .timeline-title {
+    font-size: 18px;
+  }
+
+  .timeline-description {
+    font-size: 14px;
+  }
+
+  .onas-about-section {
+    padding: 60px 0;
+  }
+
+  .onas-about-section-container {
+    padding: 0 20px;
+  }
+
+  .onas-about-section-text {
+    font-size: 18px;
   }
 }
 

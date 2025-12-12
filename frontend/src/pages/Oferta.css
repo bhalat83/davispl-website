@@ -313,10 +313,57 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .oferta-hero-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 40px;
+    gap: 40px;
+  }
+
+  .oferta-hero-content {
+    order: 1;
+  }
+
+  .oferta-hero-image {
+    order: 2;
+  }
+
+  .oferta-about-container {
+    padding: 0 40px;
+  }
+
+  .oferta-davis-home-wrapper {
+    padding: 0 40px;
+  }
+
+  .oferta-davis-home-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .oferta-davis-home-content {
+    padding: 60px 40px;
+    order: 1;
+  }
+
+  .oferta-davis-home-image {
+    order: 2;
+  }
+}
+
 @media (max-width: 768px) {
   .oferta-hero-container {
-    grid-template-columns: 1fr;
-    padding: 0 40px;
+    padding: 0 24px;
+    gap: 32px;
+  }
+
+  .oferta-hero-content {
+    order: 1;
+  }
+
+  .oferta-hero-image {
+    order: 2;
   }
 
   .oferta-title {
@@ -328,31 +375,28 @@
   }
 
   .oferta-about-container {
-    padding: 0 40px;
+    padding: 0 24px;
   }
 
   .oferta-about-text {
     font-size: 20px;
   }
 
-  .oferta-davis-home-container {
-    grid-template-columns: 1fr;
+  .oferta-davis-home-wrapper {
+    padding: 0 24px;
   }
 
   .oferta-davis-home-title {
     font-size: 32px;
   }
 
-  .oferta-davis-home-wrapper {
-    padding: 0 40px;
-  }
-
-  .oferta-davis-home-container {
-    grid-template-columns: 1fr;
-  }
-
   .oferta-davis-home-content {
-    padding: 60px 40px;
+    padding: 50px 30px;
+    order: 1;
+  }
+
+  .oferta-davis-home-image {
+    order: 2;
   }
 
   .oferta-davis-home-image img {
@@ -362,5 +406,62 @@
 
   .oferta-davis-home-reversed .oferta-davis-home-image img {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .oferta-hero {
+    padding: 40px 0;
+  }
+
+  .oferta-hero-container {
+    padding: 0 20px;
+    gap: 24px;
+  }
+
+  .oferta-hero-content {
+    order: 1;
+  }
+
+  .oferta-hero-image {
+    order: 2;
+  }
+
+  .oferta-title {
+    font-size: 28px;
+  }
+
+  .oferta-about {
+    padding: 60px 0;
+  }
+
+  .oferta-about-container {
+    padding: 0 20px;
+  }
+
+  .oferta-about-text {
+    font-size: 18px;
+  }
+
+  .oferta-davis-home {
+    margin-bottom: 80px;
+  }
+
+  .oferta-davis-home-wrapper {
+    padding: 0 20px;
+  }
+
+  .oferta-davis-home-title {
+    font-size: 28px;
+  }
+
+  .oferta-davis-home-content {
+    padding: 40px 24px;
+    order: 1;
+  }
+
+  .oferta-davis-home-image {
+    padding: 60px 0;
+    order: 2;
   }
 }

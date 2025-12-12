@@ -37,15 +37,36 @@
   opacity: 0.6;
 }
 
+@media (max-width: 1024px) {
+  .footer-container {
+    padding: 20px 40px;
+  }
+}
+
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
     gap: 16px;
     align-items: flex-start;
+    padding: 20px 24px;
   }
 
   .footer-left,
   .footer-right {
     flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-container {
+    padding: 20px 20px;
+    gap: 12px;
+  }
+
+  .footer-left,
+  .footer-right {
+    gap: 12px;
+    font-size: 13px;
   }
 }

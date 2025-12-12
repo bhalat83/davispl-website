@@ -208,10 +208,37 @@
 
 @media (max-width: 768px) {
   .details-title {
-    font-size: 36px;
+    font-size: 32px;
   }
 
   .details-variants {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .details-content {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .collection-details {
+    gap: 32px;
+  }
+
+  .details-title {
+    font-size: 28px;
+  }
+
+  .details-variants {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .details-content {
+    gap: 20px;
+  }
+
+  .accordion-header {
+    padding: 16px 0;
   }
 }

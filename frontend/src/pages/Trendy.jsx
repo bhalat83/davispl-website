@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
 import CollectionCard from '../components/CollectionCard';
@@ -8,10 +8,25 @@ import './Trendy.css';
 function Trendy() {
   const { language } = useLanguage();
   const t = translations[language].trends;
+  const location = useLocation();
   const [currentImageSlide, setCurrentImageSlide] = useState(0);
   const [collections, setCollections] = useState([]);
   const [currentCollectionSlide, setCurrentCollectionSlide] = useState(0);
-  const itemsPerSlide = 4;
+  const [imageTouchStart, setImageTouchStart] = useState(0);
+  const [imageTouchEnd, setImageTouchEnd] = useState(0);
+  const [collectionTouchStart, setCollectionTouchStart] = useState(0);
+  const [collectionTouchEnd, setCollectionTouchEnd] = useState(0);
+
+  // Dynamically calculate items per slide based on screen width
+  const getItemsPerSlide = () => {
+    if (typeof window === 'undefined') return 4;
+    if (window.innerWidth <= 480) return 1;
+    if (window.innerWidth <= 768) return 2;
+    return 4;
+  };
+
+  const [itemsPerSlide, setItemsPerSlide] = useState(getItemsPerSlide());
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1440);
 
   // Placeholder images - replace with actual images
   const trendImages = [
@@ -24,6 +39,29 @@ function Trendy() {
 
   useEffect(() => {
     fetchCollections();
+  }, []);
+
+  // Scroll to section based on hash
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [location]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      setItemsPerSlide(getItemsPerSlide());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const fetchCollections = async () => {
@@ -41,7 +79,19 @@ function Trendy() {
     }
   };
 
-  const cardWidth = 309;
+  // Calculate card width based on screen size
+  const getCardWidth = () => {
+    if (typeof window === 'undefined') return 309;
+    if (window.innerWidth <= 480) {
+      return window.innerWidth * 0.6;
+    }
+    if (window.innerWidth <= 768) {
+      return window.innerWidth * 0.5;
+    }
+    return 309;
+  };
+
+  const cardWidth = getCardWidth();
   const gap = 16;
   const slideDistance = (cardWidth + gap) * itemsPerSlide;
   const totalSlides = Math.ceil(collections.length / itemsPerSlide);
@@ -54,7 +104,17 @@ function Trendy() {
     setCurrentCollectionSlide((prev) => Math.max(prev - 1, 0));
   };
 
-  const imageCardWidth = 380;
+  // Calculate image card width - images always slide one at a time
+  const getImageCardWidth = () => {
+    if (typeof window === 'undefined') return 380;
+    if (window.innerWidth <= 1024) {
+      // On mobile/tablet, use dynamic width
+      return window.innerWidth * 0.8;
+    }
+    return 380;
+  };
+
+  const imageCardWidth = getImageCardWidth();
   const imageGap = 12;
   const imageSlideDistance = imageCardWidth + imageGap;
 
@@ -66,10 +126,64 @@ function Trendy() {
     setCurrentImageSlide((prev) => Math.max(prev - 1, 0));
   };
 
+  // Touch handlers for image carousel
+  const handleImageTouchStart = (e) => {
+    setImageTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleImageTouchMove = (e) => {
+    setImageTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleImageTouchEnd = () => {
+    if (!imageTouchStart || !imageTouchEnd) return;
+
+    const distance = imageTouchStart - imageTouchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && currentImageSlide < trendImages.length - 1) {
+      nextImageSlide();
+    }
+    if (isRightSwipe && currentImageSlide > 0) {
+      prevImageSlide();
+    }
+
+    setImageTouchStart(0);
+    setImageTouchEnd(0);
+  };
+
+  // Touch handlers for collection carousel
+  const handleCollectionTouchStart = (e) => {
+    setCollectionTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleCollectionTouchMove = (e) => {
+    setCollectionTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleCollectionTouchEnd = () => {
+    if (!collectionTouchStart || !collectionTouchEnd) return;
+
+    const distance = collectionTouchStart - collectionTouchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && currentCollectionSlide < totalSlides - 1) {
+      nextCollectionSlide();
+    }
+    if (isRightSwipe && currentCollectionSlide > 0) {
+      prevCollectionSlide();
+    }
+
+    setCollectionTouchStart(0);
+    setCollectionTouchEnd(0);
+  };
+
   return (
       <div className="trendy">
         {/* Hero Section - Two Columns */}
-        <section className="trendy-hero">
+        <section id="modernism" className="trendy-hero">
           <div className="trendy-hero-container">
             {/* Left Column - 40% */}
             <div className="trendy-hero-content">
@@ -85,7 +199,12 @@ function Trendy() {
 
             {/* Right Column - 60% */}
             <div className="trendy-hero-images">
-              <div className="trendy-carousel">
+              <div
+                className="trendy-carousel"
+                onTouchStart={handleImageTouchStart}
+                onTouchMove={handleImageTouchMove}
+                onTouchEnd={handleImageTouchEnd}
+              >
                 <div
                   className="trendy-carousel-track"
                   style={{
@@ -159,7 +278,12 @@ function Trendy() {
                 </div>
               </div>
             </div>
-            <div className="carousel">
+            <div
+              className="carousel"
+              onTouchStart={handleCollectionTouchStart}
+              onTouchMove={handleCollectionTouchMove}
+              onTouchEnd={handleCollectionTouchEnd}
+            >
               <div
                 className="carousel-track"
                 style={{
@@ -177,7 +301,7 @@ function Trendy() {
         </section>
 
         {/* Hero Section - Boho */}
-        <section className="trendy-hero">
+        <section id="boho" className="trendy-hero">
           <div className="trendy-hero-container">
             <div className="trendy-hero-content">
               <div className="trendy-date">{t.bohoDate}</div>
@@ -190,7 +314,12 @@ function Trendy() {
               </Link>
             </div>
             <div className="trendy-hero-images">
-              <div className="trendy-carousel">
+              <div
+                className="trendy-carousel"
+                onTouchStart={handleImageTouchStart}
+                onTouchMove={handleImageTouchMove}
+                onTouchEnd={handleImageTouchEnd}
+              >
                 <div
                   className="trendy-carousel-track"
                   style={{
@@ -262,7 +391,12 @@ function Trendy() {
                 </div>
               </div>
             </div>
-            <div className="carousel">
+            <div
+              className="carousel"
+              onTouchStart={handleCollectionTouchStart}
+              onTouchMove={handleCollectionTouchMove}
+              onTouchEnd={handleCollectionTouchEnd}
+            >
               <div
                 className="carousel-track"
                 style={{
@@ -280,7 +414,7 @@ function Trendy() {
         </section>
 
         {/* Hero Section - Mid Century */}
-        <section className="trendy-hero">
+        <section id="mid-century" className="trendy-hero">
           <div className="trendy-hero-container">
             <div className="trendy-hero-content">
               <div className="trendy-date">{t.midCenturyDate}</div>
@@ -293,7 +427,12 @@ function Trendy() {
               </Link>
             </div>
             <div className="trendy-hero-images">
-              <div className="trendy-carousel">
+              <div
+                className="trendy-carousel"
+                onTouchStart={handleImageTouchStart}
+                onTouchMove={handleImageTouchMove}
+                onTouchEnd={handleImageTouchEnd}
+              >
                 <div
                   className="trendy-carousel-track"
                   style={{
@@ -365,7 +504,12 @@ function Trendy() {
                 </div>
               </div>
             </div>
-            <div className="carousel">
+            <div
+              className="carousel"
+              onTouchStart={handleCollectionTouchStart}
+              onTouchMove={handleCollectionTouchMove}
+              onTouchEnd={handleCollectionTouchEnd}
+            >
               <div
                 className="carousel-track"
                 style={{
@@ -383,7 +527,7 @@ function Trendy() {
         </section>
 
         {/* Hero Section - Classic Eclecticism */}
-        <section className="trendy-hero">
+        <section id="classic-eclecticism" className="trendy-hero">
           <div className="trendy-hero-container">
             <div className="trendy-hero-content">
               <div className="trendy-date">{t.classicDate}</div>
@@ -396,7 +540,12 @@ function Trendy() {
               </Link>
             </div>
             <div className="trendy-hero-images">
-              <div className="trendy-carousel">
+              <div
+                className="trendy-carousel"
+                onTouchStart={handleImageTouchStart}
+                onTouchMove={handleImageTouchMove}
+                onTouchEnd={handleImageTouchEnd}
+              >
                 <div
                   className="trendy-carousel-track"
                   style={{
@@ -468,7 +617,12 @@ function Trendy() {
                 </div>
               </div>
             </div>
-            <div className="carousel">
+            <div
+              className="carousel"
+              onTouchStart={handleCollectionTouchStart}
+              onTouchMove={handleCollectionTouchMove}
+              onTouchEnd={handleCollectionTouchEnd}
+            >
               <div
                 className="carousel-track"
                 style={{

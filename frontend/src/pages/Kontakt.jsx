@@ -295,8 +295,8 @@ function Kontakt() {
           <h1 className="kontakt-main-title">{t.title}</h1>
 
           <div className="kontakt-grid">
-            {/* Column 1 - Company Data */}
-            <div className="kontakt-column">
+            {/* Company Data */}
+            <div className="kontakt-company-block">
               <h2 className="kontakt-company-name">{t.companyName}</h2>
               <div className="kontakt-info">
                 <p>ul. Miłosna 37</p>
@@ -307,38 +307,14 @@ function Kontakt() {
               </div>
             </div>
 
-            {/* Column 2 - Departments 1-3 */}
-            <div className="kontakt-column">
-              {departments.slice(0, 3).map((dept, index) => (
-                <div key={index} className="kontakt-department">
-                  <h3 className="kontakt-department-name">{dept}</h3>
-                  <a href="mailto:hello@davis.pl" className="kontakt-email">hello@davis.pl</a>
-                  <a href="tel:+48338127060" className="kontakt-phone">+48 33 812 70 60</a>
-                </div>
-              ))}
-            </div>
-
-            {/* Column 3 - Departments 4-5 */}
-            <div className="kontakt-column">
-              {departments.slice(3, 5).map((dept, index) => (
-                <div key={index} className="kontakt-department">
-                  <h3 className="kontakt-department-name">{dept}</h3>
-                  <a href="mailto:hello@davis.pl" className="kontakt-email">hello@davis.pl</a>
-                  <a href="tel:+48338127060" className="kontakt-phone">+48 33 812 70 60</a>
-                </div>
-              ))}
-            </div>
-
-            {/* Column 4 - Departments 6-7 */}
-            <div className="kontakt-column">
-              {departments.slice(5).map((dept, index) => (
-                <div key={index} className="kontakt-department">
-                  <h3 className="kontakt-department-name">{dept}</h3>
-                  <a href="mailto:hello@davis.pl" className="kontakt-email">hello@davis.pl</a>
-                  <a href="tel:+48338127060" className="kontakt-phone">+48 33 812 70 60</a>
-                </div>
-              ))}
-            </div>
+            {/* Departments */}
+            {departments.map((dept, index) => (
+              <div key={index} className="kontakt-department">
+                <h3 className="kontakt-department-name">{dept}</h3>
+                <a href="mailto:hello@davis.pl" className="kontakt-email">hello@davis.pl</a>
+                <a href="tel:+48338127060" className="kontakt-phone">+48 33 812 70 60</a>
+              </div>
+            ))}
           </div>
         </div>
       </section>

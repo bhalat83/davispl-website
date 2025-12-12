@@ -316,19 +316,35 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .trendy-hero-container {
     grid-template-columns: 1fr;
     padding: 0 40px;
+    gap: 40px;
   }
 
-  .trendy-title {
-    font-size: 32px;
+  .trendy-hero-content {
+    padding: 0;
   }
 
   .trendy-features-container {
     grid-template-columns: 1fr;
     padding: 0 40px;
+    gap: 24px;
+  }
+
+  .feature-item {
+    border-right: none;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 20px 0;
+  }
+
+  .feature-item:first-child {
+    padding-left: 0;
+  }
+
+  .feature-item:last-child {
+    border-bottom: none;
   }
 
   .trendy-collections-container {
@@ -336,14 +352,41 @@
   }
 
   .trendy-collections-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
     padding: 0 40px;
   }
 
-  .trendy-collections-title {
+  .carousel {
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .trendy-hero-container {
+    padding: 0 24px;
+    gap: 32px;
+  }
+
+  .trendy-title {
     font-size: 32px;
+  }
+
+  .trendy-features-container {
+    padding: 0 24px;
+  }
+
+  .trendy-collections-container {
+    padding: 0 24px;
+  }
+
+  .trendy-collections-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 0 24px;
+  }
+
+  .trendy-collections-title {
+    font-size: 24px;
   }
 
   .trendy-collections-controls {
@@ -353,10 +396,70 @@
   }
 
   .carousel {
-    margin-left: 40px;
+    margin-left: 24px;
   }
 
   .carousel-item {
     width: calc(50% - 8px);
+  }
+}
+
+@media (max-width: 480px) {
+  .trendy-hero {
+    padding: 80px 0;
+  }
+
+  .trendy-hero-container {
+    padding: 0 20px;
+    gap: 24px;
+  }
+
+  .trendy-title {
+    font-size: 28px;
+  }
+
+  .trendy-carousel-item {
+    height: 400px;
+  }
+
+  .trendy-carousel-item img {
+    height: 400px;
+  }
+
+  .trendy-features {
+    padding: 40px 0;
+  }
+
+  .trendy-features-container {
+    padding: 0 20px;
+  }
+
+  .feature-item {
+    padding: 16px 0;
+  }
+
+  .trendy-collections {
+    padding: 80px 0;
+  }
+
+  .trendy-collections-container {
+    padding: 0 20px;
+  }
+
+  .trendy-collections-header {
+    padding: 0 20px;
+    margin-bottom: 32px;
+  }
+
+  .trendy-collections-title {
+    font-size: 20px;
+  }
+
+  .carousel {
+    margin-left: 20px;
+  }
+
+  .carousel-item {
+    width: calc(60% - 8px);
   }
 }

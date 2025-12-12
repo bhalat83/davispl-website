@@ -10,10 +10,32 @@ function Home() {
   const t = translations[language].home;
   const [newCollections, setNewCollections] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const itemsPerSlide = 4;
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  // Dynamically calculate items per slide based on screen width
+  const getItemsPerSlide = () => {
+    if (typeof window === 'undefined') return 4;
+    if (window.innerWidth <= 480) return 1;
+    if (window.innerWidth <= 768) return 2;
+    return 4;
+  };
+
+  const [itemsPerSlide, setItemsPerSlide] = useState(getItemsPerSlide());
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1440);
 
   useEffect(() => {
     fetchNewCollections();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      setItemsPerSlide(getItemsPerSlide());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const fetchNewCollections = async () => {
@@ -31,7 +53,20 @@ function Home() {
     }
   };
 
-  const cardWidth = 309;
+  // Calculate card width based on screen size
+  const getCardWidth = () => {
+    if (windowWidth <= 480) {
+      // On mobile, carousel items are 60% width
+      return windowWidth * 0.6;
+    }
+    if (windowWidth <= 768) {
+      // On tablet, carousel items are 50% width
+      return windowWidth * 0.5;
+    }
+    return 309;
+  };
+
+  const cardWidth = getCardWidth();
   const gap = 16;
   const slideDistance = (cardWidth + gap) * itemsPerSlide;
   const totalSlides = Math.ceil(newCollections.length / itemsPerSlide);
@@ -42,6 +77,32 @@ function Home() {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => Math.max(prev - 1, 0));
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && currentSlide < totalSlides - 1) {
+      nextSlide();
+    }
+    if (isRightSwipe && currentSlide > 0) {
+      prevSlide();
+    }
+
+    setTouchStart(0);
+    setTouchEnd(0);
   };
 
   return (
@@ -91,7 +152,12 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="carousel">
+          <div
+            className="carousel"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <div
               className="carousel-track"
               style={{
@@ -125,25 +191,25 @@ function Home() {
           </div>
 
           {/* Kafelki 2-5 - Zdjęcia z nazwami */}
-          <div className="trend-card trend-image">
+          <Link to="/trendy#modernism" className="trend-card trend-image">
             <img src="/home/hero.jpg" alt="Modernism" />
             <div className="trend-name">Modernism</div>
-          </div>
+          </Link>
 
-          <div className="trend-card trend-image">
+          <Link to="/trendy#boho" className="trend-card trend-image">
             <img src="/home/hero.jpg" alt="Boho" />
             <div className="trend-name">Boho</div>
-          </div>
+          </Link>
 
-          <div className="trend-card trend-image">
+          <Link to="/trendy#mid-century" className="trend-card trend-image">
             <img src="/home/hero.jpg" alt="Mid Century" />
             <div className="trend-name">Mid Century</div>
-          </div>
+          </Link>
 
-          <div className="trend-card trend-image">
+          <Link to="/trendy#classic-eclecticism" className="trend-card trend-image">
             <img src="/home/hero.jpg" alt="Classic Eclecticism" />
             <div className="trend-name">Classic Eclecticism</div>
-          </div>
+          </Link>
 
           {/* Kafelek 6 - Tekst końcowy */}
           <div className="trend-card trend-outro">
