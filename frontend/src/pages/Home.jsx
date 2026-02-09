@@ -3,13 +3,56 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
 import CollectionCard from '../components/CollectionCard';
+import { buildApiUrl } from '../utils/api';
 import './Home.css';
 
 function Home() {
   const { language } = useLanguage();
   const t = translations[language].home;
   const [newCollections, setNewCollections] = useState([]);
+  const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const heroSlides = [
+    {
+      image: '/home/new-hero.png',
+      text: 'Tkaniny\ndo pięknych\nprzestrzeni'
+    },
+    {
+      image: '/home/new-hero.png',
+      text: 'Tkaniny\ndo pięknych\nprzestrzeni'
+    },
+    {
+      image: '/home/new-hero.png',
+      text: 'Tkaniny\ndo pięknych\nprzestrzeni'
+    }
+  ];
+
+  const nextHeroSlide = () => {
+    setCurrentHeroSlide((prev) => (prev + 1) % heroSlides.length);
+  };
+
+  const prevHeroSlide = () => {
+    setCurrentHeroSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
+
+  // Trend section image carousel
+  const [currentTrendImageSlide, setCurrentTrendImageSlide] = useState(0);
+  const trendImages = [
+    '/home/hero.jpg',
+    '/home/hero.jpg',
+    '/home/hero.jpg',
+    '/home/hero.jpg',
+    '/home/hero.jpg'
+  ];
+
+  const nextTrendImageSlide = () => {
+    setCurrentTrendImageSlide((prev) => Math.min(prev + 1, trendImages.length - 1));
+  };
+
+  const prevTrendImageSlide = () => {
+    setCurrentTrendImageSlide((prev) => Math.max(prev - 1, 0));
+  };
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
@@ -40,14 +83,16 @@ function Home() {
 
   const fetchNewCollections = async () => {
     try {
-      const response = await fetch('/api/v1/collections?page=1&per_page=6');
+      const response = await fetch(buildApiUrl('/v1/collections?page=1&per_page=100'));
       if (!response.ok) {
         throw new Error('Nie udało się pobrać kolekcji');
       }
       const data = await response.json();
       const collectionsArray = data.collections || [];
-      const sortedCollections = collectionsArray.sort((a, b) => b.id - a.id);
-      setNewCollections(sortedCollections.slice(0, 6));
+      // Filtruj tylko nowości
+      const newOnly = collectionsArray.filter(collection => collection.new === true);
+      const sortedCollections = newOnly.sort((a, b) => b.id - a.id);
+      setNewCollections(sortedCollections);
     } catch (err) {
       console.error('Error fetching new collections:', err);
     }
@@ -107,20 +152,39 @@ function Home() {
 
   return (
     <div className="home">
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-image">
-          {/* Placeholder for hero image - replace src with actual image path */}
-          <img src="/home/hero.jpg" alt="Davis Fabrics" />
-        </div>
-        <div className="hero-content">
-          <h1 className="hero-title">{t.heroTitle}</h1>
-          <p className="hero-subtitle">
-            {t.heroSubtitle}
-          </p>
-          <Link to="/kolekcje" className="hero-button">
-            {t.heroCta}
-          </Link>
+      {/* Hero Section - Slider */}
+      <section className="hero-slider">
+        <div className="hero-slider-wrapper">
+          <div className="hero-slides">
+            {heroSlides.map((slide, index) => (
+              <div
+                key={index}
+                className={`hero-slide ${index === currentHeroSlide ? 'active' : ''}`}
+              >
+                <img src={slide.image} alt="Davis Fabrics" className="hero-slide-image" />
+                <div className="hero-slide-gradient"></div>
+                <div className="hero-slide-content">
+                  <h1 className="hero-slide-title">
+                    {slide.text.split('\n').map((line, i) => (
+                      <span key={i}>{line}<br /></span>
+                    ))}
+                  </h1>
+                </div>
+              </div>
+            ))}
+            <div className="hero-slider-controls">
+              <button className="hero-slider-btn" onClick={prevHeroSlide} aria-label="Poprzedni slajd">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+              <button className="hero-slider-btn" onClick={nextHeroSlide} aria-label="Następny slajd">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -133,11 +197,72 @@ function Home() {
         </div>
       </section>
 
-      {/* New Collections Section */}
+      {/* Trends Section */}
+      <section className="trends">
+        <div className="trends-container">
+          {/* Wiersz 1 */}
+          <div className="trend-card trend-intro">
+            <div>
+              <h2 className="trend-intro-title">{t.trendsTitle}</h2>
+              <p className="trend-intro-text">
+                {t.trendsIntro}
+              </p>
+            </div>
+            <Link to="/kolekcje" className="trend-button">
+              {t.trendsCta}
+            </Link>
+          </div>
+
+          <Link to="/kolekcje/rambo" className="trend-card trend-image">
+            <img src="/home/hero.jpg" alt="RAMBO" />
+            <div className="trend-name">RAMBO</div>
+          </Link>
+
+          <Link to="/kolekcje/gelato" className="trend-card trend-image">
+            <img src="/home/hero.jpg" alt="GELATO" />
+            <div className="trend-name">GELATO</div>
+          </Link>
+
+          {/* Wiersz 2 */}
+          <Link to="/kolekcje/runo" className="trend-card trend-image">
+            <img src="/home/hero.jpg" alt="RUNO" />
+            <div className="trend-name">RUNO</div>
+            <div className="trend-banner trend-banner-pink">HIGH DURABILITY</div>
+          </Link>
+
+          <Link to="/kolekcje/vela" className="trend-card trend-image">
+            <img src="/home/hero.jpg" alt="VELA" />
+            <div className="trend-name">VELA</div>
+          </Link>
+
+          <div className="trend-card trend-outro">
+            <p className="trend-outro-text">
+              {t.trendsOutro}
+            </p>
+          </div>
+
+          {/* Wiersz 3 */}
+          <div className="trend-card trend-empty"></div>
+
+          <Link to="/kolekcje/pico" className="trend-card trend-image">
+            <img src="/home/hero.jpg" alt="PICO" />
+            <div className="trend-name">PICO</div>
+            <div className="trend-banner trend-banner-blue">OUTDOOR</div>
+          </Link>
+
+          <Link to="/kolekcje/sunlight" className="trend-card trend-image">
+            <img src="/home/hero.jpg" alt="SUNLIGHT" />
+            <div className="trend-name">SUNLIGHT</div>
+            <div className="trend-banner trend-banner-blue">OUTDOOR</div>
+          </Link>
+        </div>
+      </section>
+
+      {/* Contract Collections Section */}
       <section className="new-collections">
         <div className="new-collections-container">
           <div className="new-collections-header">
-            <h2 className="new-collections-title">{t.newCollectionsTitle}</h2>
+            <h2 className="new-collections-title">KOLEKCJE KONTRAKTOWE</h2>
             <div className="new-collections-controls">
               <Link to="/kolekcje" className="view-all-btn">
                 {t.viewAllCollections}
@@ -174,49 +299,111 @@ function Home() {
         </div>
       </section>
 
-      {/* Trends Section */}
-      <section className="trends">
-        <div className="trends-container">
-          {/* Kafelek 1 - Intro */}
-          <div className="trend-card trend-intro">
-            <div>
-              <h2 className="trend-intro-title">{t.trendsTitle}</h2>
-              <p className="trend-intro-text">
-                {t.trendsIntro}
-              </p>
+      {/* Trend Hero Section */}
+      <section className="home-trend-hero">
+        <div className="home-trend-hero-container">
+          {/* Left Column - Text */}
+          <div className="home-trend-hero-content">
+            <h2 className="home-trend-title">USŁUGI DLA BIZNESU</h2>
+            <ul className="home-trend-services-list">
+              <li className="home-trend-service-item">
+                <span className="home-trend-service-number">01</span>
+                <span className="home-trend-service-name">SZWALNIA I PRODUKCJA</span>
+              </li>
+              <li className="home-trend-service-item">
+                <span className="home-trend-service-number">02</span>
+                <span className="home-trend-service-name">DRUKARNIA TKANIN</span>
+              </li>
+              <li className="home-trend-service-item">
+                <span className="home-trend-service-number">03</span>
+                <span className="home-trend-service-name">PIKOWANIE</span>
+              </li>
+              <li className="home-trend-service-item">
+                <span className="home-trend-service-number">04</span>
+                <span className="home-trend-service-name">DEDYKOWANE TECHNOLOGIE DODATKOWE</span>
+              </li>
+              <li className="home-trend-service-item">
+                <span className="home-trend-service-number">05</span>
+                <span className="home-trend-service-name">BADANIE TKANIN - DAVIS LAB</span>
+              </li>
+              <li className="home-trend-service-item">
+                <span className="home-trend-service-number">06</span>
+                <span className="home-trend-service-name">NARZĘDZIA MARKETINGOWE</span>
+              </li>
+              <li className="home-trend-service-item">
+                <span className="home-trend-service-number">07</span>
+                <span className="home-trend-service-name">STREFA ARCHITEKTA</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Right Column - Image Carousel */}
+          <div className="home-trend-hero-images">
+            <div className="home-trend-carousel">
+              <div
+                className="home-trend-carousel-track"
+                style={{
+                  transform: `translateX(-${currentTrendImageSlide * 392}px)`
+                }}
+              >
+                {trendImages.map((image, index) => (
+                  <div key={index} className="home-trend-carousel-item">
+                    <img src={image} alt={`Trend ${index + 1}`} />
+                  </div>
+                ))}
+              </div>
             </div>
-            <Link to="/trendy" className="trend-button">
-              {t.trendsCta}
-            </Link>
+            <div className="home-trend-image-controls">
+              <button onClick={prevTrendImageSlide} className="home-trend-slider-btn" disabled={currentTrendImageSlide === 0}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+              <button onClick={nextTrendImageSlide} className="home-trend-slider-btn" disabled={currentTrendImageSlide >= trendImages.length - 1}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
           </div>
+        </div>
+      </section>
 
-          {/* Kafelki 2-5 - Zdjęcia z nazwami */}
-          <Link to="/trendy#modernism" className="trend-card trend-image">
-            <img src="/home/hero.jpg" alt="Modernism" />
-            <div className="trend-name">Modernism</div>
-          </Link>
-
-          <Link to="/trendy#boho" className="trend-card trend-image">
-            <img src="/home/hero.jpg" alt="Boho" />
-            <div className="trend-name">Boho</div>
-          </Link>
-
-          <Link to="/trendy#mid-century" className="trend-card trend-image">
-            <img src="/home/hero.jpg" alt="Mid Century" />
-            <div className="trend-name">Mid Century</div>
-          </Link>
-
-          <Link to="/trendy#classic-eclecticism" className="trend-card trend-image">
-            <img src="/home/hero.jpg" alt="Classic Eclecticism" />
-            <div className="trend-name">Classic Eclecticism</div>
-          </Link>
-
-          {/* Kafelek 6 - Tekst końcowy */}
-          <div className="trend-card trend-outro">
-            <p className="trend-outro-text">
-              {t.trendsOutro}
-            </p>
+      {/* Trend Features Section */}
+      <section className="home-trend-features">
+        <div className="home-trend-features-container">
+          <div className="home-feature-item">
+            <div className="home-feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="3" y="3" width="18" height="18" />
+                <path d="M9 9L15 15M15 9L9 15" />
+              </svg>
+            </div>
+            <p className="home-feature-text">Prostota i minimalistyczna forma jako fundament współczesnego designu</p>
           </div>
+          <div className="home-feature-item">
+            <div className="home-feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="3" y="3" width="18" height="18" />
+                <path d="M9 9L15 15M15 9L9 15" />
+              </svg>
+            </div>
+            <p className="home-feature-text">Geometria jako podstawa struktury i estetyki</p>
+          </div>
+          <div className="home-feature-item">
+            <div className="home-feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="3" y="3" width="18" height="18" />
+                <path d="M9 9L15 15M15 9L9 15" />
+              </svg>
+            </div>
+            <p className="home-feature-text">Stonowana paleta barw, która wprowadza harmonię oraz spokój</p>
+          </div>
+        </div>
+        <div className="home-trend-features-button-wrapper">
+          <Link to="/oferta" className="home-trend-button">
+            Przejdź do usług
+          </Link>
         </div>
       </section>
     </div>

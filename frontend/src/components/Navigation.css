@@ -1,10 +1,10 @@
 .navigation {
   width: 100%;
   background-color: #fff;
-  border-bottom: 1px solid #e5e5e5;
   position: sticky;
   top: 0;
   z-index: 1000;
+  margin-bottom: 24px;
 }
 
 .nav-container {
@@ -12,6 +12,15 @@
   margin: 0 auto;
   padding: 20px 70px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-container-mobile {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px 70px;
+  display: none;
   justify-content: space-between;
   align-items: center;
 }
@@ -38,16 +47,90 @@
   text-transform: uppercase;
   color: #000;
   text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.nav-menu a:hover {
+  opacity: 0.7;
 }
 
 .nav-menu a.active {
   font-weight: 700;
 }
 
-.nav-right {
+
+/* Strefa Architekta Link */
+.nav-architect-link {
+  font-family: 'Gilroy', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.56px;
+  text-align: right;
+  text-transform: uppercase;
+  color: #000;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+.nav-architect-link:hover {
+  opacity: 0.7;
+}
+
+/* Nav Tools (Search + Language) */
+.nav-tools {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
+}
+
+/* Nav Search */
+.nav-search {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.nav-search-input {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000;
+  background-color: #F0F0F0;
+  border: none;
+  padding: 8px 12px;
+  width: 0;
+  opacity: 0;
+  transition: width 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+  outline: none;
+}
+
+.nav-search-input::placeholder {
+  color: #666;
+}
+
+.nav-search.open .nav-search-input {
+  width: 200px;
+  opacity: 1;
+  padding: 8px 12px;
+}
+
+.nav-search-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  transition: opacity 0.3s ease;
+}
+
+.nav-search-btn:hover {
+  opacity: 0.7;
 }
 
 /* Language Selector */
@@ -65,27 +148,30 @@
   text-transform: uppercase;
   color: #000;
   background: none;
-  border: 1px solid #e5e5e5;
-  padding: 8px 16px;
+  border: none;
+  padding: 8px 0;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.3s ease;
-  border-radius: 4px;
+  transition: opacity 0.3s ease;
 }
 
 .language-button:hover {
-  border-color: #000;
+  opacity: 0.7;
 }
 
 .language-arrow {
-  font-size: 10px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  transform: rotate(45deg);
   transition: transform 0.3s ease;
 }
 
 .language-arrow.open {
-  transform: rotate(180deg);
+  transform: rotate(-135deg);
 }
 
 .language-dropdown {
@@ -241,6 +327,13 @@
   font-weight: 700;
 }
 
+.mobile-nav-menu .mobile-architect-link {
+  margin-top: 16px;
+  padding-top: 24px;
+  border-top: 2px solid #000;
+  font-weight: 600;
+}
+
 /* Mobile Language Selector */
 .mobile-language-selector {
   margin-top: auto;
@@ -292,9 +385,23 @@
 }
 
 /* Responsive */
+@media (max-width: 1280px) {
+  .nav-menu {
+    gap: 20px;
+  }
+
+  .nav-search.open .nav-search-input {
+    width: 160px;
+  }
+}
+
 @media (max-width: 1024px) {
-  .desktop-nav {
+  .nav-container.desktop-nav {
     display: none;
+  }
+
+  .nav-container-mobile {
+    display: flex;
   }
 
   .hamburger-menu {
@@ -303,7 +410,8 @@
 }
 
 @media (max-width: 768px) {
-  .nav-container {
+  .nav-container,
+  .nav-container-mobile {
     padding: 20px 40px;
   }
 
@@ -313,7 +421,8 @@
 }
 
 @media (max-width: 480px) {
-  .nav-container {
+  .nav-container,
+  .nav-container-mobile {
     padding: 16px 24px;
   }
 
