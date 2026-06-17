@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Proxy dla API przez PHP
+RewriteRule ^api/(.*)$ api.php?path=$1 [QSA,L]
+
+# React Router - przekierowanie do index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]

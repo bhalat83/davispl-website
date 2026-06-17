@@ -1,0 +1,503 @@
+.downloads-page {
+  width: 100%;
+  padding: 80px 0 120px;
+}
+
+.downloads-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 70px;
+}
+
+.downloads-header {
+  margin-bottom: 48px;
+}
+
+.downloads-title {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  color: #000;
+  margin: 0 0 32px 0;
+}
+
+.downloads-search {
+  position: relative;
+  max-width: 480px;
+}
+
+.downloads-search-input {
+  width: 100%;
+  padding: 12px 44px 12px 16px;
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  color: #000;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.downloads-search-input:focus {
+  border-color: #000;
+}
+
+.downloads-search-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  pointer-events: none;
+}
+
+/* Two-column layout */
+.downloads-layout {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.downloads-tree-col {
+  flex: 0 0 60%;
+  min-width: 0;
+}
+
+.downloads-side-col {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Tree */
+.downloads-tree {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #e0e0e0;
+}
+
+.tree-collection {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tree-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tree-row:hover {
+  background: #fafafa;
+}
+
+.tree-row--open {
+  background: #f0f0f0;
+}
+
+.tree-row--open:hover {
+  background: #ebebeb;
+}
+
+/* Level 1: collection */
+.tree-row--collection {
+  padding: 16px 4px;
+  gap: 14px;
+}
+
+/* Level 2: category wrapper shifts border/bg to indent */
+.tree-category-wrapper {
+  margin-left: 72px;
+}
+
+.tree-row--category {
+  padding: 12px 8px 12px 24px;
+}
+
+/* Level 3: category content shifts border/bg further */
+.tree-category-content {
+  margin-left: 88px;
+}
+
+.tree-row--file {
+  padding: 10px 8px 10px 24px;
+  cursor: default;
+}
+
+.tree-row--file:hover {
+  background: #ebebeb;
+}
+
+/* Level 3: folder (textures3d per-variant) */
+.tree-row--folder {
+  padding: 10px 8px 10px 24px;
+}
+
+.tree-row--folder:hover {
+  background: #ebebeb;
+}
+
+/* Level 4: empty folder content */
+.tree-row--empty {
+  padding: 8px 8px 8px 52px;
+  cursor: default;
+}
+
+.tree-row--empty:hover {
+  background: none;
+}
+
+.tree-empty-label {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 13px;
+  color: #999;
+  font-style: italic;
+}
+
+.tree-checkbox {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  cursor: pointer;
+  accent-color: #000;
+  margin-left: 8px;
+}
+
+/* Arrow toggle — pushed to the right */
+.tree-toggle {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #666;
+  transition: transform 0.2s ease;
+  margin-left: auto;
+}
+
+.tree-toggle--open {
+  transform: rotate(180deg);
+}
+
+.tree-toggle svg {
+  display: block;
+}
+
+/* Collection thumbnail */
+.tree-col-thumb {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid #e8e8e8;
+}
+
+.tree-col-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Label group (name + meta stacked) */
+.tree-label-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.tree-label {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  flex: 1;
+}
+
+.tree-label--collection {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.tree-label--variant {
+  font-size: 14px;
+  color: #444;
+}
+
+.tree-meta {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 12px;
+  color: #999;
+  font-weight: 400;
+}
+
+.tree-label-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.tree-label-count .tree-label {
+  flex: none;
+}
+
+.tree-count {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 13px;
+  color: #999;
+  flex-shrink: 0;
+}
+
+/* Small variant thumbnail (color swatch or video thumb) */
+.tree-variant-thumb {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+}
+
+.tree-variant-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tree-file-icon {
+  flex-shrink: 0;
+  color: #888;
+}
+
+.tree-children {
+  /* no background — only expanded content gets darker bg */
+}
+
+/* Category wrapper — separated by lines */
+.tree-category-wrapper {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.tree-category-wrapper:last-child {
+  border-bottom: none;
+}
+
+/* Expanded category content — no special bg */
+.tree-category-content {
+}
+
+/* Items within category content — separated by lines */
+.tree-category-content .tree-item {
+  border-bottom: 1px solid #ebebeb;
+}
+
+.tree-category-content .tree-item:last-child {
+  border-bottom: none;
+}
+
+.tree-no-results {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  color: #666;
+  padding: 32px 0;
+  text-align: center;
+}
+
+/* Floating download button */
+.downloads-fab {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  animation: fab-in 0.2s ease;
+}
+
+@keyframes fab-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.downloads-fab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 36px;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Gilroy', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  border: 1px solid #000;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.downloads-fab-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.downloads-fab-btn:not(:disabled):hover {
+  background-color: transparent;
+  color: #000;
+}
+
+.downloads-fab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  background-color: #fff;
+  color: #000;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 12px;
+  line-height: 1;
+}
+
+/* Quick download panel */
+.quick-download {
+  padding: 0;
+}
+
+.quick-download-title {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #000;
+  margin: 0 0 16px 0;
+}
+
+.quick-download-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quick-download-row {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  background: #f5f5f5;
+}
+
+.quick-download-label {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #000;
+}
+
+.quick-download-desc {
+  font-family: 'Gilroy', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #888;
+}
+
+.quick-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 20px;
+  background-color: #fff;
+  color: #000;
+  font-family: 'Gilroy', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.quick-download-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quick-download-btn:not(:disabled):hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.quick-download-icon {
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .downloads-container {
+    padding: 0 40px;
+  }
+
+  .downloads-layout {
+    flex-direction: column;
+  }
+
+  .downloads-tree-col {
+    flex: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .downloads-page {
+    padding: 60px 0 80px;
+  }
+
+  .downloads-container {
+    padding: 0 24px;
+  }
+
+  .downloads-title {
+    font-size: 32px;
+  }
+
+  .downloads-search {
+    max-width: 100%;
+  }
+
+  .tree-category-wrapper {
+    margin-left: 40px;
+  }
+
+  .tree-category-content {
+    margin-left: 48px;
+  }
+
+  .tree-row--category,
+  .tree-row--file,
+  .tree-row--folder {
+    padding-left: 16px;
+  }
+
+  .tree-row--empty {
+    padding-left: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .downloads-container {
+    padding: 0 20px;
+  }
+
+  .downloads-title {
+    font-size: 28px;
+  }
+}
