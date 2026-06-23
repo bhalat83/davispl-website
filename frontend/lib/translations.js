@@ -38,7 +38,8 @@ export const translations = {
       specification: 'Specyfikacja produktu',
       features: 'Cechy produktu',
       downloads: 'Pliki do pobrania',
-      technicalSheet: 'Karta techniczna PDF',
+      technicalSheet: 'Pobierz kartę produktu',
+      imagePackage: 'Pobierz pakiet zdjęć',
       noFiles: 'Brak dostępnych plików',
     },
     // Trends Page
@@ -245,7 +246,8 @@ export const translations = {
       specification: 'Product specification',
       features: 'Technical data',
       downloads: 'Downloads',
-      technicalSheet: 'Technical sheet PDF',
+      technicalSheet: 'Download product sheet',
+      imagePackage: 'Download image package',
       noFiles: 'No files available',
     },
     // Trends Page

@@ -2,7 +2,7 @@ export const routes = {
   PL: {
     home: '/',
     collections: '/kolekcje',
-    collection: (nazwa) => `/kolekcja/${nazwa}-2`,
+    collection: (nazwa) => `/kolekcja/${nazwa}`,
     contact: '/kontakt',
     about: '/o-nas',
     trends: '/trendy',
@@ -31,7 +31,7 @@ export const getRoutes = (language) => routes[language] || routes.PL;
 export const toEnPath = (pathname) => {
   if (pathname.startsWith('/kolekcja/')) {
     const slug = pathname.replace('/kolekcja/', '');
-    return `/en/collection/${slug}`;
+    return `/en/collection/${slug}-2`;
   }
   const map = {
     '/': '/en/home',
@@ -50,7 +50,7 @@ export const toEnPath = (pathname) => {
 // Map any /en/ path to its PL equivalent
 export const toPlPath = (pathname) => {
   if (pathname.startsWith('/en/collection/')) {
-    const slug = pathname.replace('/en/collection/', '');
+    const slug = pathname.replace('/en/collection/', '').replace(/-2$/, '');
     return `/kolekcja/${slug}`;
   }
   const map = {

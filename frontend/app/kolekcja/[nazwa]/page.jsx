@@ -1,10 +1,18 @@
 'use client';
 
-import { useState, useEffect, useRef, use } from 'react';
+import { useState, useEffect, useRef, use, useCallback } from 'react';
 import { buildApiUrl } from '@/lib/api';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/lib/translations';
 import './KolekcjaDetails.css';
+
+function DownloadIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 1v9M4 7l4 4 4-4M2 13h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
 
 function KolekcjaDetails({ params }) {
   const { nazwa } = use(params);
@@ -15,6 +23,7 @@ function KolekcjaDetails({ params }) {
   const [error, setError] = useState(null);
   const [activeAccordion, setActiveAccordion] = useState(null);
   const [currentMedia, setCurrentMedia] = useState(null);
+  const [downloadingZip, setDownloadingZip] = useState(false);
   const hoverTimeoutRef = useRef(null);
 
   useEffect(() => {
@@ -55,6 +64,36 @@ function KolekcjaDetails({ params }) {
       setLoading(false);
     }
   };
+
+  const downloadImagePackage = useCallback(async () => {
+    if (!collection?.variants?.length || downloadingZip) return;
+    setDownloadingZip(true);
+    try {
+      const files = collection.variants
+        .filter((v) => v.image)
+        .map((v) => {
+          const ext = v.image.split('.').pop()?.split('?')[0] || 'jpg';
+          return { name: `${collection.name} - ${v.name}.${ext}`, url: v.image };
+        });
+      const res = await fetch('/api/download', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ files }),
+      });
+      if (!res.ok) throw new Error('Download failed');
+      const blob = await res.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = objectUrl;
+      a.download = `${collection.name?.toLowerCase()}-images.zip`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(objectUrl);
+    } finally {
+      setDownloadingZip(false);
+    }
+  }, [collection, downloadingZip]);
 
   const toggleAccordion = (index) => {
     setActiveAccordion(activeAccordion === index ? null : index);
@@ -246,7 +285,7 @@ function KolekcjaDetails({ params }) {
               </button>
               {activeAccordion === 2 && (
                 <div className="accordion-content">
-                  {collection.pdf ? (
+                  {collection.pdf && (
                     <a
                       href={collection.pdf}
                       target="_blank"
@@ -254,8 +293,20 @@ function KolekcjaDetails({ params }) {
                       className="download-link"
                     >
                       {t.technicalSheet}
+                      <DownloadIcon />
                     </a>
-                  ) : (
+                  )}
+                  {collection.variants?.length > 0 && (
+                    <button
+                      onClick={downloadImagePackage}
+                      className="download-link"
+                      disabled={downloadingZip}
+                    >
+                      {downloadingZip ? '...' : t.imagePackage}
+                      <DownloadIcon />
+                    </button>
+                  )}
+                  {!collection.pdf && !collection.variants?.length && (
                     <p>{t.noFiles}</p>
                   )}
                 </div>
